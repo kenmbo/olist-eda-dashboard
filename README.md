@@ -12,6 +12,19 @@ Currently working on the `README.md`.
 * Publish a clean file which only outputs the dashboard. 
 * As always, update `README.md`,
 
+
+# Dependencies
+* Python 3 (version 3.1+) - Programming Language
+* jupyter-notebook - Notebook application
+* pandas - Data manipulation
+* numpy - Number calcs
+* sqlite3 - Execytubg SQL queries with the relational database (olist.sqlite)
+* matplotlib - data charts, graphs, etc.
+* plotly - data charts, graphs, etc.
+* folium - Rendering geospatial map for CLV and logistics.
+* dash - building and deploying web dashboard
+
+
 # Installtion
 Obtain the the O-list dataset through Kaggle:
 [https://www.kaggle.com/datasets/terencicp/e-commerce-dataset-by-olist-as-an-sqlite-database](https://www.kaggle.com/datasets/terencicp/e-commerce-dataset-by-olist-as-an-sqlite-database)
@@ -24,7 +37,7 @@ Once your notebook viewer is setup, open the `olist-eda.ipynb` file into your vi
 
 ## Linux
 ```
-$ sudo apt install python3 git
+# Clone repository
 $ cd ~/Downloads # (or any folder of your choice)
 $ git clone https://github.com/kenmbo/olist-eda-dashboard.git
 $ cd olist-eda-dashboard
@@ -42,8 +55,7 @@ $ notebook olist-eda.ipynb
 # Get the olist.sqlite file after unzipping the from Archive.zip
 # https://www.kaggle.com/datasets/terencicp/e-commerce-dataset-by-olist-as-an-sqlite-database/data
 # (Please see Installtion for details)
-```
 
-# Dependencies
-* Python 3 (version 3.1+)
-* Python 
+# Install required packages
+pip install pandas numpy matplotlib plotly folium dash
+```
