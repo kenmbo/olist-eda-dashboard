@@ -408,3 +408,38 @@ FROM CLV
 GROUP BY zip_code_prefix
 """
 
+#1
+orders_per_day_df = pd.read_sql_query(orders_per_day, conn)
+#2
+count_orders_per_hour_df = pd.read_sql_query(orders_per_day_of_the_week_and_hour, conn)
+count_orders_per_hour_df = count_orders_per_hour_df.set_index('day_of_week_name')
+#3
+order_product_and_shipping_costs_df = pd.read_sql_query(order_product_and_shipping_costs, conn)
+#4
+category_sales_summary_df = pd.read_sql_query(category_sales_summary, conn)
+#5
+ordered_categories_df = pd.read_sql_query(ordered_categories, conn)
+#6
+categories_by_median_df = pd.read_sql_query(categories_by_median, conn)
+#7
+monthly_sales_selected_categories_df = pd.read_sql_query(monthly_sales_selected_categories, conn)
+monthly_sales_selected_categories_df = monthly_sales_selected_categories_df.set_index('year_month')
+# format datetime to be pandas friendly
+monthly_sales_selected_categories_df.index = pd.to_datetime(monthly_sales_selected_categories_df.index)
+#8
+lm_per_category_df = pd.read_sql_query(lm_per_category, conn)
+#9
+forecast_2018_12_df = pd.read_sql_query(forecasted_sales_dec_2018, conn)
+#10
+order_stage_times_top_10_citites_df = pd.read_sql_query(order_stage_times_top_10_citites, conn)
+order_stage_times_top_10_citites_df = order_stage_times_top_10_citites_df.set_index('city')
+#11
+daily_avg_shipping_time_df = pd.read_sql_query(daily_avg_shipping_time, conn)
+#12
+review_score_count_df = pd.read_sql_query(review_score_count, conn)
+#13
+seller_review_scores_and_sales_df = pd.read_sql_query(seller_review_scores_and_sales, conn)
+#14
+seller_shipping_times_df = pd.read_sql_query(seller_shipping_times, conn)
+#15
+lead_conversion_df = pd.read_sql_query(lead_conversion, conn)
