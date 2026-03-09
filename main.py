@@ -9,6 +9,16 @@ import squarify
 import statsmodels
 import folium
 import dash
+import sys
+
+try:
+	file = open("olist.sqlite", "r")
+	content = file.read()
+	file.close()
+
+except FileNotFoundError:
+	print("Error: The file \'olist.sqlite\' is not found. Please place it in the same directory as this file. Exiting program.")
+	sys.exit(1)
 
 conn = sqlite3.connect('olist.sqlite') # SQL server connect to the database (local file)
 
