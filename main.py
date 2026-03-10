@@ -465,3 +465,36 @@ fig1.update_layout(
     plot_bgcolor='rgba(0,0,0,0)',  # Set background to transparent
     paper_bgcolor='rgba(0,0,0,0)'   # Set background to transparent
 )
+i
+
+### Plotly heatmap
+fig2 = go.Figure(data=go.Heatmap(
+                   z=count_orders_per_hour_df.values,
+                   x=count_orders_per_hour_df.columns,
+                   y=count_orders_per_hour_df.index,
+                   colorscale='YlGnBu'
+                   ))
+
+fig2.update_layout(
+    title="Number of orders by day of the week and hour of the day",
+    xaxis_title="Hour of the day",
+    yaxis_title="",
+    plot_bgcolor='rgba(0,0,0,0)',  # Set background to transparent
+    paper_bgcolor='rgba(0,0,0,0)'   # Set background to transparent
+)
+
+
+# Add text annotations
+for y in range(len(count_orders_per_hour_df.index)):
+    for x in range(len(count_orders_per_hour_df.columns)):
+        fig2.add_annotation(
+            x=count_orders_per_hour_df.columns[x],
+            y=count_orders_per_hour_df.index[y],
+            text=str(int(count_orders_per_hour_df.iloc[y, x])),
+            showarrow=False,
+            font=dict(
+                color='white' if count_orders_per_hour_df.iloc[y, x] > mean_orders else 'black',
+                size=10
+            )
+        )
+
