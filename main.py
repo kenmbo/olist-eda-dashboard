@@ -22,6 +22,9 @@ except FileNotFoundError:
 
 conn = sqlite3.connect('olist.sqlite') # SQL server connect to the database (local file)
 
+
+# SQL QUERIES
+
 orders_per_day = """
 SELECT
     DATE(order_purchase_timestamp) AS day,
@@ -407,7 +410,11 @@ FROM CLV
     JOIN geolocation ON CLV.zip_code_prefix = geolocation.geolocation_zip_code_prefix
 GROUP BY zip_code_prefix
 """
+# END OF SQL QUERIES
 
+
+
+# DATA FRAME INITIALIZATION (THIS IS COMPUTING THE FRAMEWORK)
 #1
 orders_per_day_df = pd.read_sql_query(orders_per_day, conn)
 #2
@@ -443,3 +450,18 @@ seller_review_scores_and_sales_df = pd.read_sql_query(seller_review_scores_and_s
 seller_shipping_times_df = pd.read_sql_query(seller_shipping_times, conn)
 #15
 lead_conversion_df = pd.read_sql_query(lead_conversion, conn)
+
+### Plotly Line Plot
+fig1 = px.line(orders_per_day_df, x='day', y='order_count', title='Number of orders per day')
+fig1.update_xaxes(
+    tickangle=90,
+    tickformat="%Y-%m-%d"
+)
+
+fig1.update_layout(
+    title="Number of orders per day",
+    xaxis_title="Day",
+    yaxis_title="Number of orders",
+    plot_bgcolor='rgba(0,0,0,0)',  # Set background to transparent
+    paper_bgcolor='rgba(0,0,0,0)'   # Set background to transparent
+)
