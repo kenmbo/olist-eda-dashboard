@@ -537,6 +537,24 @@ fig3.update_layout(
     showlegend=False  # Hide legend if not needed
 )
 
-fig3.show()
 
-
+## Tree map
+# Save copy of orignal to another dataframe
+category_sales_summary_ORIGINAL_NAMES_df = category_sales_summary_df.copy()
+# Scale the 'sales' column to the range 0.000 to 1.000
+sales_min = category_sales_summary_df['sales'].min()
+sales_max = category_sales_summary_df['sales'].max()
+category_sales_summary_df['scaled_sales'] = (
+    (category_sales_summary_df['sales'] - sales_min) / (sales_max - sales_min)
+).round(3)
+# Gemeral formatting
+category_sales_summary_df['sales'] = pd.to_numeric(category_sales_summary_df['sales'])
+category_sales_summary_df['sales'] = category_sales_summary_df['sales'].apply(lambda x: int(x))
+fig4 = px.treemap(category_sales_summary_df, path=['category'], values='sales',
+                 color='scaled_sales',
+                 color_continuous_scale='viridis')
+fig4.update_layout(
+    title="Sales by category",
+    plot_bgcolor='rgba(0,0,0,0)',  # Set background to transparent
+    paper_bgcolor='rgba(0,0,0,0)',   # Set background to transparent
+)
