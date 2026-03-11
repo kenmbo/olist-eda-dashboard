@@ -498,3 +498,45 @@ for y in range(len(count_orders_per_hour_df.index)):
             )
         )
 
+## Plotly Barplot
+from plotly.subplots import make_subplots
+
+fig3 = make_subplots(rows=1, cols=2, subplot_titles=("Product cost for orders < R$500", "Shipping cost for orders < R$80"))
+
+# Left histogram (Product cost)
+fig3.add_trace(
+    go.Histogram(
+        x=order_product_and_shipping_costs_df['product_cost'],
+        nbinsx=1000,
+        name='Product Cost',
+        marker_color='#6c87a3'
+    ),
+    row=1, col=1
+)
+fig3.update_xaxes(range=[0, 500], title_text="Product cost (Brazilian reals)", row=1, col=1)
+fig3.update_yaxes(title_text="Frequency", row=1, col=1)
+
+# Right histogram (Shipping cost)
+fig3.add_trace(
+    go.Histogram(
+        x=order_product_and_shipping_costs_df['shipping_cost'],
+        nbinsx=800,
+        name='Shipping Cost',
+        marker_color='#ad865f'
+    ),
+    row=1, col=2
+)
+fig3.update_xaxes(range=[0, 80], title_text="Product cost (Brazilian reals)", row=1, col=2)
+fig3.update_yaxes(title_text="Frequency", row=1, col=2)
+
+
+fig3.update_layout(
+    barmode='overlay',
+    height=500,
+    width=1500,
+    showlegend=False  # Hide legend if not needed
+)
+
+fig3.show()
+
+
