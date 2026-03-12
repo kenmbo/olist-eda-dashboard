@@ -652,3 +652,31 @@ fig7.update_layout(
     hovermode='x unified'
 )
 
+# Sales forecast
+for category in selected_categories:
+    category_forecast = forecast_2018_12_df[forecast_2018_12_df['category'] == category]
+fig8 = go.Figure()
+
+for category in selected_categories:
+    category_forecast = forecast_2018_12_df[forecast_2018_12_df['category'] == category]
+    fig8.add_trace(go.Scatter(
+        x=category_forecast['december_2018_day'],
+        y=category_forecast['moving_avg_sales'],
+        mode='lines',
+        name=category,
+        line=dict(dash='dot')
+    ))
+
+fig8.update_layout(
+    title="Sales Forecast for December 2018",
+    xaxis_title="Days of December 2018",
+    yaxis_title="Forecasted Sales (Brazilian Reals)",
+    xaxis=dict(
+        tickmode='linear',  # Set tick mode to linear
+        tick0=1,           # Starting tick value
+        dtick=1           # Tick interval
+    ),
+    hovermode='x unified'
+
+)
+
