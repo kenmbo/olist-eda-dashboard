@@ -558,3 +558,41 @@ fig4.update_layout(
     plot_bgcolor='rgba(0,0,0,0)',  # Set background to transparent
     paper_bgcolor='rgba(0,0,0,0)',   # Set background to transparent
 )
+
+# Box plot
+def remove_outliers_by_category(df, column, n_std=3):
+  new_df = df.copy()
+  for category in df['category'].unique():
+    category_data = df[df['category'] == category]
+    mean = category_data[column].mean()
+    std = category_data[column].std()
+    lower_bound = mean - n_std * std
+    upper_bound = mean + n_std * std
+    new_df = new_df[~((new_df['category'] == category) & ((new_df[column] < lower_bound) | (new_df[column] > upper_bound)))]
+  return new_df
+
+ordered_categories_df = remove_outliers_by_category(ordered_categories_df, 'weight')
+
+fig5 = px.box(ordered_categories_df, x="weight", y="category",
+             title="Product weight by category (top 18 categories by sales)",
+             category_orders={"category": categories_by_median_df['category'].tolist()},
+             color="category")
+fig5.update_traces(boxpoints=False)
+
+fig5.update_layout(
+    yaxis=dict(
+        tickfont=dict(size=9)  # Set the font size to 16
+    ),
+    xaxis=dict(
+        range=[0, 26000],  # Set the x-axis range from 0 to 26,000
+        dtick=1000,  # Set the tick interval to 2,500
+    ),
+    showlegend=False,
+    #paper_bgcolor='rgba(255,255,255,1)',  # Set plotly background to transparent
+    plot_bgcolor='rgba(51,51,51,1)'   # Set plot to dark grey
+)
+
+fig5.update_yaxes(title_text="Category")
+# Update x-axis labels
+fig5.update_xaxes(title_text="Product weigth (Grams)")
+
