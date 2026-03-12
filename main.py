@@ -596,3 +596,32 @@ fig5.update_yaxes(title_text="Category")
 # Update x-axis labels
 fig5.update_xaxes(title_text="Product weigth (Grams)")
 
+
+# Line graph
+monthly_sales_selected_categories_df = pd.read_sql_query(monthly_sales_selected_categories, conn)
+monthly_sales_selected_categories_df = monthly_sales_selected_categories_df.set_index('year_month')
+#Make the date-time pandas compatible
+monthly_sales_selected_categories_df.index = pd.to_datetime(monthly_sales_selected_categories_df.index)
+fig6 = go.Figure()
+
+for column in monthly_sales_selected_categories_df.columns:
+  fig6.add_trace(go.Scatter(
+      x=monthly_sales_selected_categories_df.index,
+      y=monthly_sales_selected_categories_df[column],
+      mode='lines+markers',
+      name=column,
+      line=dict(dash='dot')
+  ))
+
+
+fig6.update_layout(
+    title="Monthly Sales for Selected Categories",
+    xaxis_title="Year-Month",
+    yaxis_title="Total Sales",
+    xaxis=dict(
+        tickmode='array',
+        tickvals=monthly_sales_selected_categories_df.index,
+        ticktext=[date.strftime('%Y-%m') for date in monthly_sales_selected_categories_df.index]
+    ),
+    hovermode='x unified'
+)
