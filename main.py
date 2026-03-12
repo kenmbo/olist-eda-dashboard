@@ -625,3 +625,30 @@ fig6.update_layout(
     ),
     hovermode='x unified'
 )
+
+# limits for x-axis
+days = np.arange(0, 604)
+
+fig7 = go.Figure()
+
+for category in selected_categories:
+    lm = lm_per_category_df[lm_per_category_df['category'] == category]
+    slope = lm['slope'].values[0]
+    intercept = lm['intercept'].values[0]
+    days = np.arange(0, 604)
+    line = intercept + slope * days
+
+    fig7.add_trace(go.Scatter(
+        x=days,
+        y=line,
+        mode='lines',
+        name=f'{category} (slope={slope:.2f})'
+    ))
+
+fig7.update_layout(
+    title="Regression lines for the selected categories",
+    xaxis_title="Days from 2017-01-01",
+    yaxis_title="Daily sales (Brazilian reals)",
+    hovermode='x unified'
+)
+
