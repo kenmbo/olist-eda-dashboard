@@ -747,5 +747,20 @@ fig11 = px.bar(review_score_count_df, x='review_score', y='count',
 ### RFM Buckets TODO
 RFM_Bucket_df = pd.read_sql_query(rfm_buckets, conn)
 
+#fig12 = px.scatter(RFM_Bucket_df,
+#                 x='avg_days_since_purchase',
+#                 y='avg_sales_per_customer',
+#                 size='customer_count',
+#                 size_max=60,
+#                 color=RFM_Bucket_df['RFM_Bucket'],
+#                 hover_name='RFM_Bucket',
+#                 title='RFM Segmentation of Customers',
+#                 text='RFM_Bucket'
+#)
+#
+#fig12.update_layout(
+#    xaxis_title='Average Days Since Last Purchase',
+#    yaxis_title='Average Sales Per Customer'
+#)
 
-###
+####
