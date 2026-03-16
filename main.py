@@ -680,3 +680,21 @@ fig8.update_layout(
 
 )
 
+#Cities Bar Graph
+# Get the index of each city
+order_stage_times_top_10_citites_df = order_stage_times_top_10_citites_df.set_index('city')
+fig9 = px.bar(order_stage_times_top_10_citites_df.reset_index(),
+            x=['approved', 'delivered_to_carrier', 'delivered_to_customer', 'estimated_delivery'],
+            y='city',
+            orientation='h',
+            title='Average days for each order stage (top 10 cities by sales)',
+            labels={'value': 'Average Days', 'city': 'City'},
+            range_x=[0, 31]
+           )
+
+fig9.update_layout(
+   barmode='stack',  # Use stacked bars
+   xaxis_title='Average Days',  # X-axis title
+   yaxis_title='City',  # Y-axis title
+)
+
