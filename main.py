@@ -698,3 +698,43 @@ fig9.update_layout(
    yaxis_title='City',  # Y-axis title
 )
 
+
+# Line Graph for Shipping time
+from statsmodels.nonparametric.smoothers_lowess import lowess
+
+fig10 = go.Figure()
+
+fig10.add_trace(go.Scatter(
+    x=pd.to_datetime(daily_avg_shipping_time_df['purchase_date']),
+    y=daily_avg_shipping_time_df['avg_delivery_time'],
+    mode='lines',
+    name='Daily Average'
+))
+
+fig10.add_trace(go.Scatter(
+    x=pd.to_datetime(daily_avg_shipping_time_df['purchase_date']),
+    y=[daily_avg_shipping_time_df['avg_delivery_time'].mean()] * len(daily_avg_shipping_time_df),
+    mode='lines',
+    name='Yearly Average',
+    line=dict(color='red', dash='dash')
+))
+
+# Calculate LOWESS trend line
+x_numeric = pd.to_numeric(pd.to_datetime(daily_avg_shipping_time_df['purchase_date']))
+y = daily_avg_shipping_time_df['avg_delivery_time']
+trend_line = lowess(y, x_numeric, frac=0.3)  # Adjust frac for smoothing
+
+fig10.add_trace(go.Scatter(
+    x=pd.to_datetime(daily_avg_shipping_time_df['purchase_date']),
+    y=trend_line[:, 1],
+    mode='lines',
+    name='LOWESS Trend Line'
+))
+
+
+fig10.update_layout(
+    title="Average Delivery Time",
+    xaxis_title="Year-Month",
+    yaxis_title="Days",
+)
+
