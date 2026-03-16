@@ -738,3 +738,14 @@ fig10.update_layout(
     yaxis_title="Days",
 )
 
+# Distirbution plot for review scores
+fig11 = px.bar(review_score_count_df, x='review_score', y='count',
+             color='review_score',
+             color_continuous_scale=['red', 'green'],
+             title='Distribution of Review Scores')
+
+### RFM Buckets TODO
+RFM_Bucket_df = pd.read_sql_query(rfm_buckets, conn)
+
+
+###
