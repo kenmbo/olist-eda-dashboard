@@ -764,3 +764,25 @@ fig12.update_layout(
 )
 
 ####
+
+# Folium Map
+df = pd.read_sql_query(avg_clv_per_zip_prefix, conn)
+
+# Create a map using Folium
+map = folium.Map(location=[-14.2350, -51.9253], zoom_start=4)
+
+# Add circle markers for each zip code prefix
+for i, zip_prefix in df.iterrows():
+    folium.CircleMarker(
+        location=[zip_prefix['latitude'], zip_prefix['longitude']],
+        radius=0.1 * np.sqrt(zip_prefix['customer_count']),
+        color=None,
+        fill_color='#85001d',
+        fill_opacity=0.1 + 0.1 * np.sqrt(zip_prefix['avg_CLV'] / df['avg_CLV'].max()),
+        popup=(
+            f"<b>Zip Code Prefix:</b> {int(zip_prefix['zip_prefix'])}<br>"
+            f"<b>Average CLV:</b> {int(zip_prefix['avg_CLV'])}<br>"
+            f"<b>Customers:</b> {int(zip_prefix['customer_count'])}"
+        )
+    ).add_to(map)
+
