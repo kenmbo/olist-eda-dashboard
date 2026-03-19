@@ -786,3 +786,23 @@ for i, zip_prefix in df.iterrows():
         )
     ).add_to(map)
 
+
+# Review Score clusterubg
+seller_review_scores_and_sales_df = pd.read_sql_query(seller_review_scores_and_sales, conn)
+fig14 = px.scatter(seller_review_scores_and_sales_df, x='total_sales', y='avg_review_score',
+                 size='num_orders', color='num_orders',
+                 log_x=True,
+                 opacity=0.7,
+                 trendline="lowess",
+                 trendline_options=dict(frac=0.1)
+                 #, color_continuous_scale="matter"
+                 )
+fig14.update_traces(marker=dict(
+                  sizeref=1),
+                  )
+fig14.update_layout(
+    xaxis_title='Total sales',
+    yaxis_title='Average review score'
+)
+
+
