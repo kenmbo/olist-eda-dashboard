@@ -911,3 +911,8 @@ fig17.update_layout(
     barmode='group'
 )
 
+fig18 = px.bar(lead_conversion_df, x='origin', y='conversion_rate',
+             title='Lead conversion rate by origin')
+fig18.update_layout(
+    yaxis_title='Conversion rate (%)'
+)
