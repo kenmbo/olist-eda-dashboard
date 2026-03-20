@@ -830,3 +830,30 @@ def remove_outliers_iqr(df, column, group_column):
   return new_df
 
 seller_shipping_times_df = remove_outliers_iqr(seller_shipping_times_df, 'delivery_time', 'bucket')
+
+def remove_outliers_iqr(df, column, group_column):
+  new_df = pd.DataFrame()
+  for group_value in df[group_column].unique():
+    group_df = df[df[group_column] == group_value]
+    Q1 = group_df[column].quantile(0.25)
+    Q3 = group_df[column].quantile(0.75)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+    filtered_group_df = group_df[(group_df[column] >= lower_bound) & (group_df[column] <= upper_bound)]
+    new_df = pd.concat([new_df, filtered_group_df])
+  return new_df
+
+seller_shipping_times_df = remove_outliers_iqr(seller_shipping_times_df, 'delivery_time', 'bucket')
+
+fig16 = px.box(seller_shipping_times_df, x='bucket', y='delivery_time',
+             color='bucket', points='outliers',
+             category_orders={'bucket': seller_buckets['bucket']})
+fig16.update_traces(boxpoints=False)  # Disable fliers
+
+fig16.update_layout(
+    title="Delivery Time by Seller Order Volume",
+    xaxis_title="Sellers with...",
+    yaxis_title="Shipping time (days)",
+)
+fig16.show()
