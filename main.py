@@ -805,4 +805,28 @@ fig14.update_layout(
     yaxis_title='Average review score'
 )
 
+seller_buckets = pd.read_sql_query(sellers_per_bucket, conn)
+fig15 = px.bar(seller_buckets, x='bucket', y='seller_count',
+             title='Number of sellers by orders (grouped)', color='bucket')
+fig15.update_layout(
+    xaxis_title='Amount of orders per seller',
+    yaxis_title='Number of sellers'
+)
 
+# Whisker Plot
+seller_shipping_times_df = pd.read_sql_query(seller_shipping_times, conn)
+
+def remove_outliers_iqr(df, column, group_column):
+  new_df = pd.DataFrame()
+  for group_value in df[group_column].unique():
+    group_df = df[df[group_column] == group_value]
+    Q1 = group_df[column].quantile(0.25)
+    Q3 = group_df[column].quantile(0.75)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+    filtered_group_df = group_df[(group_df[column] >= lower_bound) & (group_df[column] <= upper_bound)]
+    new_df = pd.concat([new_df, filtered_group_df])
+  return new_df
+
+seller_shipping_times_df = remove_outliers_iqr(seller_shipping_times_df, 'delivery_time', 'bucket')
