@@ -856,4 +856,58 @@ fig16.update_layout(
     xaxis_title="Sellers with...",
     yaxis_title="Shipping time (days)",
 )
-fig16.show()
+
+lead_conversion_df = pd.read_sql_query(lead_conversion, conn)
+fig17 = go.Figure()
+
+fig17.add_trace(go.Bar(
+    x=lead_conversion_df['origin'],
+    y=lead_conversion_df['qualified_leads'],
+    name='Qualified Leads',
+    marker_color='indianred'
+))
+
+fig17.add_trace(go.Bar(
+    x=lead_conversion_df['origin'],
+    y=lead_conversion_df['closed_leads'],
+    name='Closed Leads',
+    marker_color='steelblue'
+))
+
+
+# Add annotations for qualified leads
+for i, v in enumerate(lead_conversion_df['qualified_leads']):
+    fig17.add_annotation(
+        x=lead_conversion_df['origin'][i],
+        y=v,
+        text=str(v),
+        showarrow=False,
+        font=dict(
+            size=16
+        ),
+        xshift= -10,
+        yshift = 10
+    )
+
+
+# Add annotations for closed leads
+for i, v in enumerate(lead_conversion_df['closed_leads']):
+    fig17.add_annotation(
+        x=lead_conversion_df['origin'][i],
+        y=v,
+        text=str(v),
+        showarrow=False,
+        font=dict(
+            size=16
+        ),
+        xshift= 16,
+        yshift = 10
+    )
+
+fig17.update_layout(
+    title="Leads by Origin",
+    xaxis_title="Origin",
+    yaxis_title="Number of Potential Sellers",
+    barmode='group'
+)
+
