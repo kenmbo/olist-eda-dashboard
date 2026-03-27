@@ -785,9 +785,21 @@ for i, zip_prefix in df.iterrows():
             f"<b>Customers:</b> {int(zip_prefix['customer_count'])}"
         )
     ).add_to(map)
-
-clv_df = df
+# Folium Map
+CLV_df = df.copy()
 df = None
+
+CLV_df = pd.read_csv('clv_df.csv')
+fig13 = px.density_mapbox(CLV_df, lat='latitude', lon='longitude', z='customer_count', radius=15,
+                        center=dict(lat=-14.2350, lon=-51.9253), zoom=3,
+                        mapbox_style="carto-darkmatter",
+)
+fig13.update_coloraxes(colorbar_title_font_color="#FFF", colorbar_tickfont_color="#FFF")
+
+fig13.update_traces(
+    hovertemplate= 'Zip code: ' + CLV_df['zip_prefix'].astype(str) + '<br>Average CLV: %{z}<br>' + 'Customers: ' + CLV_df['customer_count'].astype(str) + '<br> Latitude: %{lat} <br> Longitude: %{lon}'
+)
+
 
 
 # Review Score clusterubg
