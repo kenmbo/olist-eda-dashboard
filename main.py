@@ -817,7 +817,33 @@ fig13.update_traces(
     hovertemplate= 'Zip code: ' + CLV_df['zip_prefix'].astype(str) + '<br>Average CLV: %{z}<br>' + 'Customers: ' + CLV_df['customer_count'].astype(str) + '<br> Latitude: %{lat} <br> Longitude: %{lon}'
 )
 
+# Dark mode for the folium map
+fig13_alt = px.density_mapbox(CLV_df, lat='latitude', lon='longitude', z='avg_CLV', radius=15,
+                        center=dict(lat=-14.2350, lon=-51.9253), zoom=3,
+                        mapbox_style="carto-darkmatter")
+fig13_alt.update_layout(
+   title='Density Map of Average CLV in Brazil',
+    margin={"r":0,"t":30,"l":0,"b":0},
+    coloraxis=dict(
+        colorbar=dict(
+            title="Customers",
+            titleside="top",
+            len=0.8,
+            x=0.8,  # X position (0 is left, 1 is right)
+            y=0.9,    # Y position (0 is bottom, 1 is top)
+            xanchor="left",
+            yanchor="top",
+            bgcolor="rgba(0,0,0,0.5)",
+        ),
+    ),
+    plot_bgcolor='rgba(0,0,0,0)',  # Set background to transparent
+    paper_bgcolor='rgba(0,0,0,0)',   # Set background to transparent
+)
+fig13_alt.update_coloraxes(colorbar_title_font_color="#FFF", colorbar_tickfont_color="#FFF")
 
+fig13_alt.update_traces(
+    hovertemplate= 'Zip code: ' + CLV_df['zip_prefix'].astype(str) + '<br>Average CLV: %{z}<br>' + 'Customers: ' + CLV_df['customer_count'].astype(str) + '<br> Latitude: %{lat} <br> Longitude: %{lon}'
+)
 
 # Review Score clusterubg
 seller_review_scores_and_sales_df = pd.read_sql_query(seller_review_scores_and_sales, conn)
