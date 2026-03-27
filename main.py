@@ -786,6 +786,9 @@ for i, zip_prefix in df.iterrows():
         )
     ).add_to(map)
 
+clv_df = df
+df = None
+
 
 # Review Score clusterubg
 seller_review_scores_and_sales_df = pd.read_sql_query(seller_review_scores_and_sales, conn)
@@ -916,3 +919,4 @@ fig18 = px.bar(lead_conversion_df, x='origin', y='conversion_rate',
 fig18.update_layout(
     yaxis_title='Conversion rate (%)'
 )
+
