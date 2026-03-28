@@ -698,6 +698,16 @@ fig9.update_layout(
    yaxis_title='City',  # Y-axis title
 )
 
+fig9.update_layout(
+    legend=dict(
+        x=0.8,  # X position (0 is left, 1 is right)
+        y=1,    # Y position (0 is bottom, 1 is top)
+        xanchor="left",  # Anchor point on legend for X position
+        yanchor="top",   # Anchor point on legend for Y position
+        bgcolor="#fff",
+    )
+)
+
 
 # Line Graph for Shipping time
 from statsmodels.nonparametric.smoothers_lowess import lowess
