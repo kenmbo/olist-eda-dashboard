@@ -992,3 +992,12 @@ fig_list = [fig1, fig2, fig3, fig4, fig5, fig6, fig7, fig8, fig9, fig10, fig11, 
 # Dashboard seciton
 jupyter_dash.inline_exceptions = False
 
+
+# Categorizing each graph
+order_analysis = [fig1, fig2, fig3, fig6, fig9, map]
+Top_orders = [fig4, fig5]
+predictions = [fig7, fig8, fig12]
+devilery = [fig10, fig11, fig16]
+reviews_analysis = [fig11, fig14]
+order_origin = [fig17, fig18]
+
