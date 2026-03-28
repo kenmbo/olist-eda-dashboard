@@ -985,3 +985,10 @@ fig18.update_layout(
     yaxis_title='Conversion rate (%)'
 )
 
+map = fig13
+fig_list = [fig1, fig2, fig3, fig4, fig5, fig6, fig7, fig8, fig9, fig10, fig11, map, fig14, fig15, fig16, fig17, fig18]
+
+
+# Dashboard seciton
+jupyter_dash.inline_exceptions = False
+
