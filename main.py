@@ -1007,4 +1007,52 @@ stylesheet_URL = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/
 app = JupyterDash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP, stylesheet_URL])
 app.config.suppress_callback_exceptions = True
 
+sidebar = html.Div(
+    [
+        html.Button("☰", id="toggle-button", style={
+            "width": "100%", "backgroundColor": "#000", "color": "white", "border": "none", "fontSize": "24px"
+        }),
+        html.Div(
+            dbc.Nav(
+                [
+                    dbc.NavLink(
+                        html.Div([html.Span(className=icon, style={"marginRight": "10px"}), html.Span(name, className="link-text")]),
+                        href="#", id=f"{name.lower().replace(' ', '-')}-link", active="exact"
+                    ) for name, (icon, _) in tabs_dict.items()
+                ],
+                vertical=True, pills=True
+            ),
+            id="sidebar-content"
+        ),
+    ],
+    id="sidebar",
+    style={
+        "width": "200px", "backgroundColor": "#000", "color": "white",
+        "height": "100vh", "position": "fixed", "top": 0, "left": 0, "padding": "10px",
+        "transition": "width 0.3s"
+    }
+)
 
+sidebar_short = html.Div(
+    id="mySidebar",
+    className="sidebar",
+    children=[
+        html.Div(
+            dbc.Nav(
+                [
+                    dbc.NavLink(
+                        html.Div([html.Span(className=icon, style={"marginRight": "10px"}), html.Span(name, className="link-text")]),
+                        href="#", id=f"{name.lower().replace(' ', '-')}-link", active="exact"
+                    ) for name, (icon, _) in tabs_dict.items()
+                ],
+                vertical=True, pills=True
+            ),
+            id="sidebar-content"
+        )
+    ],
+    style={
+        "width": "300px", "backgroundColor": "#000", "color": "white",
+        "height": "100vh", "position": "fixed", "top": 0, "left": "-13vw", "padding": "10px",
+        "transition": "all 0.3s", "zIndex" : 99999999,
+    }
+)
