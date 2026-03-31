@@ -1001,3 +1001,10 @@ devilery = [fig10, fig11, fig16]
 reviews_analysis = [fig11, fig14]
 order_origin = [fig17, fig18]
 
+stylesheet_URL = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+
+# Create the Dash app
+app = JupyterDash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP, stylesheet_URL])
+app.config.suppress_callback_exceptions = True
+
+
