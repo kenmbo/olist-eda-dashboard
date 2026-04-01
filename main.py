@@ -1059,3 +1059,14 @@ sidebar_short = html.Div(
 
 # Main content area
 content = html.Div(id="page-content", style={"padding": "20px", "marginLeft": "20px", "transition": "margin-left 0.3s"})
+
+# Layout
+app.layout = html.Div([sidebar_short, content])
+
+# Sidebar toggle callback
+@app.callback(
+    [Output("sidebar", "style"), Output("sidebar-content", "style"), Output("page-content", "style")],
+    [Input("toggle-button", "n_clicks")],
+    [State("sidebar", "style")],
+    prevent_initial_call=True
+)
