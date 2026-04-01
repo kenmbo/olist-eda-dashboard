@@ -1056,3 +1056,6 @@ sidebar_short = html.Div(
         "transition": "all 0.3s", "zIndex" : 99999999,
     }
 )
+
+# Main content area
+content = html.Div(id="page-content", style={"padding": "20px", "marginLeft": "20px", "transition": "margin-left 0.3s"})
