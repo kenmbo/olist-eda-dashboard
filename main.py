@@ -1070,3 +1070,15 @@ app.layout = html.Div([sidebar_short, content])
     [State("sidebar", "style")],
     prevent_initial_call=True
 )
+def toggle_sidebar(n_clicks, current_style):
+    if current_style["width"] == "200px":
+        # Collapse sidebar
+        return {"width": "60px", "backgroundColor": "#000", "color": "white", "height": "100vh"}, {"display": "none"}, {"padding": "20px", "marginLeft": "60px"}
+    else:
+        # Expand sidebar
+        return {"width": "200px", "backgroundColor": "#000", "color": "white", "height": "100vh"}, {"display": "block"}, {"padding": "20px", "marginLeft": "200px"}
+
+
+# TODO port number should change
+if __name__ == "__main__":
+    app.run_server(port=3000)
