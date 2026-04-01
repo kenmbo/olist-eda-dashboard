@@ -10,8 +10,8 @@ Currently working on the `README.md`.
 * __Show some pictures!__
 * Create `requirements.txt`.
 * Publish a clean file which only outputs the dashboard. 
+* Investigate port number situtation
 * As always, update `README.md`,
-
 
 # Dependencies
 * Python 3 (version 3.1+) - Programming Language
