@@ -1078,6 +1078,12 @@ def toggle_sidebar(n_clicks, current_style):
         # Expand sidebar
         return {"width": "200px", "backgroundColor": "#000", "color": "white", "height": "100vh"}, {"display": "block"}, {"padding": "20px", "marginLeft": "200px"}
 
+# Callback to display the dropdown and figures based on sidebar tab click
+@app.callback(
+    Output("page-content", "children"),
+    [Input(f"{name.lower().replace(' ', '-')}-link", "n_clicks") for name in tabs_dict.keys()],
+    prevent_initial_call=True
+)
 
 # TODO port number should change
 if __name__ == "__main__":
