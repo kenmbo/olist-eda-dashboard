@@ -1078,6 +1078,28 @@ def toggle_sidebar(n_clicks, current_style):
         # Expand sidebar
         return {"width": "200px", "backgroundColor": "#000", "color": "white", "height": "100vh"}, {"display": "block"}, {"padding": "20px", "marginLeft": "200px"}
 
+
+def display_figures_tab(*args):
+    ctx = dash.callback_context
+    if not ctx.triggered:
+        return html.Div("Select a tab from the sidebar.")
+
+    tab_clicked = ctx.triggered[0]["prop_id"].split(".")[0]
+    tab_name = tab_clicked.replace("-link", "").replace("-", " ").title()
+    _, figs = tabs_dict[tab_name]
+
+    dropdown = dcc.Dropdown(
+        id="figure-dropdown",
+        options=[{"label": key, "value": key} for key in figs.keys()],
+        placeholder="Select a figure",
+        style={"marginTop": "20px", "width": "50%"}
+    )
+    return html.Div([
+        html.H3(f"Figures for {tab_name}"), dropdown,
+        html.Div(id="figure-container")
+    ])
+
+
 # Callback to display the dropdown and figures based on sidebar tab click
 @app.callback(
     Output("page-content", "children"),
