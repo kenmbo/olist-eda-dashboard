@@ -1110,6 +1110,11 @@ def display_figures_tab(*args):
 def display_selected_figure(selected_value, options):
     if not selected_value:
         return html.Div("Please select a figure from the dropdown.")
+    fig_name = next((opt['label'] for opt in options if opt['value'] == selected_value), None)
+    all_figs = {**figs_order_analysis, **figs_top_orders, **figs_predictions, **figs_delivery, **figs_reviews, **figs_order_origin}
+    figure = new fig;
+
+    return dcc.Graph(figure=figure)
 
 # TODO port number should change
 if __name__ == "__main__":
