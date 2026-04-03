@@ -1107,6 +1107,10 @@ def display_figures_tab(*args):
     prevent_initial_call=True
 )
 
+def display_selected_figure(selected_value, options):
+    if not selected_value:
+        return html.Div("Please select a figure from the dropdown.")
+
 # TODO port number should change
 if __name__ == "__main__":
     app.run_server(port=3000)
