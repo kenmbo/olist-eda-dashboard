@@ -1119,7 +1119,7 @@ def display_selected_figure(selected_value, options):
         return html.Div("Please select a figure from the dropdown.")
     fig_name = next((opt['label'] for opt in options if opt['value'] == selected_value), None)
     all_figs = {**figs_order_analysis, **figs_top_orders, **figs_predictions, **figs_delivery, **figs_reviews, **figs_order_origin}
-    figure = new fig;
+    figure = all_figs.get(fig_name)
 
     return dcc.Graph(figure=figure)
 
