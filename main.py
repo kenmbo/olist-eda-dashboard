@@ -1008,8 +1008,11 @@ figs_delivery = {"Fig10": fig10, "Fig15": fig15, "Fig16":fig16}
 figs_reviews = {"Fig14": fig14, "Fig11": fig11}
 figs_order_origin = {"Fig17": fig17, "Fig18": fig18}
 
-stylesheet_URL = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+tabs_dict = {
+    "Order Analysis": ("fas fa-box", figs_order_analysis)
+}
 
+stylesheet_URL = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
 # Create the Dash app
 app = JupyterDash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP, stylesheet_URL])
 app.config.suppress_callback_exceptions = True
