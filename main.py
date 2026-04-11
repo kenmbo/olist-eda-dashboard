@@ -163,7 +163,7 @@ WHERE
     product_category_name_english IN {top_18_categories}
 """
 
-ategories_by_median = f"""
+categories_by_median = f"""
 WITH OrderedCategories AS (
     {ordered_categories}
 )
