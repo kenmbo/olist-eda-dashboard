@@ -35,4 +35,6 @@ def get_categories_by_median(conn):
 
 def get_monthly_sales_selected_categories(conn):
     df = pd.read_sql_query(queries.monthly_sales_selected_categories, conn)
+    df = df.set_index('year_month')
+    df.index = pd.to_datetime(df.index) # Format datetime to be pandas friendly
     return df
