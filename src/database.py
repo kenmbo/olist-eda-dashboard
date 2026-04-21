@@ -38,3 +38,27 @@ def get_monthly_sales_selected_categories(conn):
     df = df.set_index('year_month')
     df.index = pd.to_datetime(df.index) # Format datetime to be pandas friendly
     return df
+
+def get_lm_per_category(conn):
+    return pd.read_sql_query(queries.lm_per_category, conn)
+
+def get_forecasted_sales_dec_2018(conn):
+    return pd.read_sql_query(queries.forecasted_sales_dec_2018, conn)
+
+def get_order_stage_times_top_cities(conn):
+    df = pd.read_sql_query(queries.order_stage_times_top_10_citites, conn)
+    return df.set_index('city')
+
+def get_daily_avg_shipping_time(conn):
+    return pd.read_sql_query(queries.daily_avg_shipping_time, conn)
+
+def get_review_score_count(conn):
+    return pd.read_sql_query(queries.review_score_count, conn)
+
+def get_rfm_buckets(conn):
+    return pd.read_sql_query(queries.rfm_buckets, conn)
+
+def get_avg_clv_per_zip_prefix(conn):
+    return pd.read_sql_query(queries.avg_clv_per_zip_prefix, conn)
+
+###########
