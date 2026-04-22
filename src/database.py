@@ -61,4 +61,14 @@ def get_rfm_buckets(conn):
 def get_avg_clv_per_zip_prefix(conn):
     return pd.read_sql_query(queries.avg_clv_per_zip_prefix, conn)
 
-###########
+def get_seller_review_scores_and_sales(conn):
+    return pd.read_sql_query(queries.seller_review_scores_and_sales, conn)
+
+def get_seller_shipping_times(conn):
+    return pd.read_sql_query(queries.seller_shipping_times, conn)
+
+def get_lead_conversion(conn):
+    return pd.read_sql_query(queries.lead_conversion, conn)
+
+def get_sellers_per_bucket(conn):
+    return pd.read_sql_query(queries.sellers_per_bucket, conn)
