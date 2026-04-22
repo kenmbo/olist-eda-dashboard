@@ -68,6 +68,11 @@ GROUP BY customer_city
 ORDER BY city_order_count DESC
 LIMIT 10
 """
+orders_per_city_reversed = f"""
+SELECT *
+FROM ({orders_per_city})
+ORDER BY city_order_count
+"""
 
 # 3. Order price statistics
 order_price_stats = """
