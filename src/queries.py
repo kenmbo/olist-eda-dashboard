@@ -10,13 +10,49 @@ selected_categories = ('health_beauty', 'auto', 'toys', 'electronics', 'fashion_
 # SQL QUERIES
 # ==========================================
 
-# 1. Orders per day
+# 1. Heatmap
 orders_per_day = """
 SELECT
     DATE(order_purchase_timestamp) AS day,
     COUNT(*) AS order_count
 FROM orders
 GROUP BY day
+"""
+
+order_day_hour = """
+SELECT
+    -- Day of the week abreviated
+    CASE STRFTIME('%w', order_purchase_timestamp)
+        WHEN '1' THEN 'Mon'
+        WHEN '2' THEN 'Tue'
+        WHEN '3' THEN 'Wed'
+        WHEN '4' THEN 'Thu'
+        WHEN '5' THEN 'Fri'
+        WHEN '6' THEN 'Sat'
+        WHEN '0' THEN 'Sun'
+        END AS day_of_week_name,
+    -- Day of the week as integer (Sunday=7)
+    CAST(STRFTIME('%w', order_purchase_timestamp) AS INTEGER) AS day_of_week_int,
+    -- Hour of the day (0-24)
+    CAST(STRFTIME("%H", order_purchase_timestamp) AS INTEGER) AS hour
+FROM orders
+"""
+
+count_orders_per_hour = ',\n    '.join([
+    f'COUNT(CASE WHEN hour = {i} THEN 1 END) AS "{i}"' \
+    for i in range(24)
+])
+
+orders_per_day_of_the_week_and_hour = f"""
+WITH OrderDayHour AS (
+    {order_day_hour}
+)
+SELECT
+    day_of_week_name,
+    {count_orders_per_hour}
+FROM OrderDayHour
+GROUP BY day_of_week_int
+ORDER BY day_of_week_int
 """
 
 # 2. Orders per city (Top 10)
