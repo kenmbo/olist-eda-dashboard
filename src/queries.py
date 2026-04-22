@@ -1,7 +1,10 @@
 # ==========================================
 # CONSTANTS & PLACEHOLDERS
 # ==========================================
+top_18_categories = ('bed_bath_table', 'health_beauty', 'sports_leisure', 'furniture_decor', 'computers_accessories', 'housewares', 'watches_gifts', 'telephony', 'garden_tools', 'auto', 'toys', 'cool_stuff', 'perfumery', 'baby', 'electronics', 'stationery', 'fashion_bags_accessories', 'pet_shop')
+top_cities = {'customer_city': ['sao paulo', 'rio de janeiro', 'belo horizonte', 'brasilia', 'curitiba', 'campinas', 'porto alegre', 'salvador', 'guarulhos', 'sao bernardo do campo']}
 
+selected_categories = ('health_beauty', 'auto', 'toys', 'electronics', 'fashion_shoes')
 
 # ==========================================
 # SQL QUERIES
