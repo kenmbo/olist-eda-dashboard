@@ -11,6 +11,7 @@ Currently working on the `README.md`.
 * Create `requirements.txt`.
 * Publish a clean file which only outputs the dashboard. 
 * Investigate port number situtation
+* Fix some SQL stirngs.
 * As always, update `README.md`,
 
 # Dependencies

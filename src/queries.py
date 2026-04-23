@@ -180,3 +180,19 @@ WHERE rank > 18
 # ==========================================
 # MISSING QUERIES 
 # ==========================================
+
+seller_review_scores_and_sales = """
+-- TODO: Insert SQL here
+"""
+
+seller_shipping_times = """
+-- TODO: Insert SQL here
+"""
+
+lead_conversion = """
+-- TODO: Insert SQL here
+"""
+
+sellers_per_bucket = """
+-- TODO: Insert SQL here
+"""
