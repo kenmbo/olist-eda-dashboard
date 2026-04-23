@@ -198,10 +198,6 @@ HAVING
     COUNT(orders.order_id) > 10
 """
 
-seller_shipping_times = """
--- TODO: Insert SQL here
-"""
-
 lead_conversion = """
 SELECT
     COALESCE(origin, 'unknown') AS origin,
@@ -215,6 +211,17 @@ GROUP BY COALESCE(origin, 'unknown')
 ORDER BY COUNT(leads_qualified.mql_id) DESC
 """
 
-sellers_per_bucket = """
+sellers_per_bucket = f"""
+WITH BucketedSellers AS (
+    {bucketed_sellers}
+)
+SELECT
+    bucket,
+    COUNT(seller_id) AS seller_count
+FROM BucketedSellers
+GROUP BY bucket
+"""
+
+seller_shipping_times = """
 -- TODO: Insert SQL here
 """
