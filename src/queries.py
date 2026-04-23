@@ -222,6 +222,18 @@ FROM BucketedSellers
 GROUP BY bucket
 """
 
-seller_shipping_times = """
--- TODO: Insert SQL here
+seller_shipping_times = f"""
+WITH BucketedSellers AS (
+    {bucketed_sellers}
+)
+SELECT
+    bucket,
+    BucketedSellers.seller_id,
+    JULIANDAY(order_delivered_customer_date) - JULIANDAY(order_purchase_timestamp)
+        AS delivery_time
+FROM orders
+    JOIN order_items USING (order_id)
+    JOIN BucketedSellers USING (seller_id)
+WHERE order_status = 'delivered'
 """
+
