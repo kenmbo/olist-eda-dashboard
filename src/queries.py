@@ -192,6 +192,21 @@ WHERE
     product_category_name_english IN {top_18_categories}
 """
 
+categories_by_median = f"""
+WITH OrderedCategories AS (
+    {ordered_categories}
+)
+SELECT category
+FROM OrderedCategories
+WHERE
+    -- Odd number of products: Select the middle row
+    (category_count % 2 = 1 AND category_row_n = (category_count + 1) / 2) OR
+    -- Even number of products: Select the two middle rows to be averaged
+    (category_count % 2 = 0 AND category_row_n IN ((category_count / 2), (category_count / 2 + 1)))
+GROUP BY category
+ORDER BY AVG(weight)
+"""
+
 # ==========================================
 # MISSING QUERIES 
 # ==========================================
