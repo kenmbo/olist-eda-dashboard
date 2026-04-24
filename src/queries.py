@@ -177,6 +177,21 @@ FROM RankedCategories
 WHERE rank > 18
 """
 
+ordered_categories = f"""
+SELECT
+    product_weight_g AS weight,
+    product_category_name_english AS category,
+    ROW_NUMBER() OVER(PARTITION BY product_category_name_english ORDER BY product_weight_g)
+        AS category_row_n,
+    COUNT(*) OVER(PARTITION BY product_category_name_english) AS category_count
+FROM
+    products
+    JOIN order_items USING (product_id)
+    JOIN product_category_name_translation USING (product_category_name)
+WHERE
+    product_category_name_english IN {top_18_categories}
+"""
+
 # ==========================================
 # MISSING QUERIES 
 # ==========================================
