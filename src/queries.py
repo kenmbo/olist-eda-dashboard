@@ -225,6 +225,40 @@ WHERE order_purchase_timestamp >= '2017-01-01'
 GROUP BY year_month
 """
 
+forecasted_sales_dec_2018 = f"""
+WITH DailySalesPerCategory AS (
+    {daily_sales_per_category}
+),
+LmPerCategory AS (
+    {lm_per_category}
+),
+ForecastedSales AS (
+    SELECT
+        DATE(date, '+1 year') AS date,
+        category,
+        -- Increase in predicted sales * sales 1 year ago
+        (intercept + slope * (day + CAST(JULIANDAY('2018-12-31') - JULIANDAY('2017-12-31') AS INTEGER)))
+            / (intercept + slope * day) * sales
+            AS forecasted_sales
+    FROM DailySalesPerCategory
+        JOIN LmPerCategory USING (category)
+    -- Filter for days of December 2018
+    WHERE day + CAST(JULIANDAY('2018-12-31') - JULIANDAY('2017-12-31') AS INTEGER)
+        BETWEEN CAST(JULIANDAY('2018-12-01') - JULIANDAY('2017-01-01') AS INTEGER)
+        AND CAST(JULIANDAY('2018-12-31') - JULIANDAY('2017-01-01') AS INTEGER)
+)
+SELECT
+    CAST(strftime('%d', date) AS INTEGER) AS december_2018_day,
+    category,
+    -- 5-day moving average
+    AVG(forecasted_sales)
+        OVER (PARTITION BY category ORDER BY date ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING)
+        AS moving_avg_sales
+FROM ForecastedSales
+"""
+
+
+
 # ==========================================
 # MISSING QUERIES 
 # ==========================================
