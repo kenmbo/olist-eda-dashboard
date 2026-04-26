@@ -276,8 +276,20 @@ GROUP BY  customer_city
 ORDER BY approved + delivered_to_carrier + delivered_to_customer DESC
 """
 
-
-
+# Bucketed Sellers
+# From 15 Number of sellers->orders Bar Graph
+bucketed_sellers = """
+SELECT
+    seller_id,
+    CASE
+        WHEN COUNT(order_id) BETWEEN 1 AND 9 THEN '1-9 orders'
+        WHEN COUNT(order_id) BETWEEN 10 AND 99 THEN '10-99 orders'
+        WHEN COUNT(order_id) BETWEEN 100 AND 999 THEN '100-999 orders'
+        ELSE '1000+ orders'
+    END AS bucket
+FROM order_items
+GROUP BY seller_id
+"""
 
 # ==========================================
 # MISSING QUERIES 
