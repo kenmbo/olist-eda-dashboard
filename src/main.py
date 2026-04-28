@@ -18,3 +18,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# To run the server locally:
+# uvicorn src.main:app --reload
