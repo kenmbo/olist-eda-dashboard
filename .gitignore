@@ -1,4 +1,18 @@
 .git/
 .ipynb_checkpoints/
+
+# Database
+data/olist.sqlite
+
+# Python caches
+__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+.env/
+venv/
+env/
+
 # Temporary testing folder
 test/
