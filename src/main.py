@@ -29,7 +29,13 @@ app.add_middleware(
 
 @app.get("/api/orders/daily")
 def get_daily_orders():
-    return None
+    """Returns the number of orders per day."""
+    conn = database.get_connection()
+    df = database.get_orders_per_day(conn)
+    conn.close()
+    
+    # Format for Plotly.js: Columnar arrays
+    return df.to_dict(orient="list")
 
 @app.get("/api/orders/hourly")
 def get_hourly_orders():
