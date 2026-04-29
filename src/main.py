@@ -51,4 +51,9 @@ def get_hourly_orders():
 
 @app.get("/api/categories/sales")
 def get_category_sales():
-    return None
+    """Returns top categories by sales volume."""
+    conn = database.get_connection()
+    df = database.get_category_sales_summary(conn)
+    conn.close()
+    
+    return df.to_dict(orient="list")
