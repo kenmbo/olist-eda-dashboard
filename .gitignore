@@ -3,6 +3,7 @@
 
 # Database
 data/olist.sqlite
+src/data/olist.sqlite
 
 # Python caches
 __pycache__/

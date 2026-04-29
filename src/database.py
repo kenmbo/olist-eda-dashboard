@@ -3,7 +3,7 @@ import pandas as pd
 import sys
 from src import queries
 
-def get_connection(db_path="../data/olist.sqlite"):
+def get_connection(db_path="data/olist.sqlite"):
     """
     Adjust the db_path depending on where you run the script from.
     """
