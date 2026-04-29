@@ -22,3 +22,19 @@ app.add_middleware(
 
 # To run the server locally:
 # uvicorn src.main:app --reload
+
+# ==========================================
+# API ENDPOINTS
+# ==========================================
+
+@app.get("/api/orders/daily")
+def get_daily_orders():
+    return None
+
+@app.get("/api/orders/hourly")
+def get_hourly_orders():
+    return None
+
+@app.get("/api/categories/sales")
+def get_category_sales():
+    return None
