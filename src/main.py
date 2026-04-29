@@ -39,7 +39,15 @@ def get_daily_orders():
 
 @app.get("/api/orders/hourly")
 def get_hourly_orders():
-    return None
+    """Returns order counts grouped by day of the week and hour."""
+    conn = database.get_connection()
+    df = database.get_orders_per_hour(conn)
+    conn.close()
+    
+    # For a heatmap, we might need a specific format depending on how 
+    # we set up the React component, but 'split' or 'index' often work best 
+    # for 2D matrix data. Let's send the index, columns, and raw 2D array.
+    return df.to_dict(orient="split")
 
 @app.get("/api/categories/sales")
 def get_category_sales():
