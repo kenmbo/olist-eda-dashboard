@@ -57,3 +57,12 @@ def get_category_sales():
     conn.close()
     
     return df.to_dict(orient="list")
+
+@app.get("/api/sellers/performance")
+def get_seller_performance():
+    """Returns review scores, total sales, and order volume per seller for scatter plotting."""
+    conn = database.get_connection()
+    df = database.get_seller_review_scores_and_sales(conn)
+    conn.close()
+    
+    return df.to_dict(orient="list")
