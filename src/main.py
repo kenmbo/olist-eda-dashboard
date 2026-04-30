@@ -70,7 +70,12 @@ def get_seller_performance():
 
 @app.get("/api/leads/conversion")
 def get_lead_conversions():
-    return None
+"""Returns qualified vs closed leads and conversion rates by origin."""
+    conn = database.get_connection()
+    df = database.get_lead_conversion(conn)
+    conn.close()
+    
+    return df.to_dict(orient="list")
 
 @app.get("/api/sellers/distribution")
 def get_seller_distribution():
