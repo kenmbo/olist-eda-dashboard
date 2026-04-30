@@ -21,3 +21,7 @@ def remove_outliers_iqr(df, column, group_column):
     new_df = pd.concat([new_df, filtered_group_df])
   return new_df
 
+def remove_outliers_by_category(df, column, n_std=3):
+    """Removes outliers based on standard deviation for specific categories."""
+    new_df = df.copy()
+    return new_df

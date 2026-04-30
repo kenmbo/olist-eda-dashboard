@@ -8,9 +8,7 @@ Currently working on the `README.md`.
 # TODO
 * Note to self, project directory is in: `~/python/`.
 * __Show some pictures!__
-* Create `requirements.txt`.
-* Publish a clean file which only outputs the dashboard. 
-* Investigate port number situtation
+* Update outliers for categories.
 * As always, update `README.md`,
 
 # Dependencies
