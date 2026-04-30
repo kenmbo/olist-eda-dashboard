@@ -79,7 +79,12 @@ def get_lead_conversions():
 
 @app.get("/api/sellers/distribution")
 def get_seller_distribution():
-    return None
+"""Returns the count of sellers grouped by their total order volume buckets."""
+    conn = database.get_connection()
+    df = database.get_sellers_per_bucket(conn)
+    conn.close()
+    
+    return df.to_dict(orient="list")
 
 @app.get("/api/sellers/shipping-times")
 def get_seller_shipping():
