@@ -66,3 +66,17 @@ def get_seller_performance():
     conn.close()
     
     return df.to_dict(orient="list")
+
+@app.get("/api/leads/conversion")
+def get_lead_conversions():
+    return None
+
+@app.get("/api/sellers/distribution")
+def get_seller_distribution():
+    return None
+
+@app.get("/api/sellers/shipping-times")
+def get_seller_shipping():
+    return None
+
+
