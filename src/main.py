@@ -100,7 +100,11 @@ def get_seller_shipping():
 
 @app.get("/api/orders/costs")
 def get_order_costs():
-    return None
+"""Returns product and shipping costs for histograms."""
+    conn = database.get_connection()
+    df = database.get_order_product_and_shipping_costs(conn)
+    conn.close()
+    return df.to_dict(orient="list")
 
 @app.get("/api/categories/weights")
 def get_category_weights():

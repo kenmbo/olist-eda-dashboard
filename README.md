@@ -8,8 +8,8 @@ Currently working on the `README.md`.
 # TODO
 * Note to self, project directory is in: `~/python/`.
 * __Show some pictures!__
-* Update outliers for categories.
-* As always, update `README.md`,
+* Finish API implementations of src/database.py.
+* As always, update `README.md`.
 
 # Dependencies
 * Python 3 (version 3.1+) - Programming Language
@@ -22,7 +22,7 @@ Currently working on the `README.md`.
 * folium - Rendering geospatial map for CLV and logistics.
 * dash - building and deploying web dashboard
 * [FastAPI](https://github.com/fastapi/fastapi) - API engine
-* [Uvicorn](https://uvicorn.dev/)(OPTIONAL) - Easy web server to handle the API endpoints
+* [Uvicorn](https://uvicorn.dev/) (OPTIONAL) - Easy web server to handle the API endpoints
 
 
 # Installtion
