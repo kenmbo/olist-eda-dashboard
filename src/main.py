@@ -98,3 +98,18 @@ def get_seller_shipping():
     
     return clean_df.to_dict(orient="list")
 
+@app.get("/api/orders/costs")
+def get_order_costs():
+    return None
+
+@app.get("/api/categories/weights")
+def get_category_weights():
+    return None
+
+@app.get("/api/sales/monthly")
+def get_monthly_sales():
+    return None
+
+@app.get("/api/sales/regression")
+def get_sales_regression():
+    return None
