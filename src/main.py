@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src import database 
+from src import database
+from src import utils
 
 app = FastAPI(
     title="Olist Dashboard API",
