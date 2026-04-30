@@ -1,3 +1,5 @@
+import pandas as pd
+
 def view_table(table, limit):
     query = f"""
         SELECT *
