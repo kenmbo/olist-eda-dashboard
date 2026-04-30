@@ -21,6 +21,8 @@ Currently working on the `README.md`.
 * plotly - data charts, graphs, etc.
 * folium - Rendering geospatial map for CLV and logistics.
 * dash - building and deploying web dashboard
+* [https://github.com/fastapi/fastapi](FastAPI) - API engine
+* [https://uvicorn.dev/](uvicorn)(OPTIONAL) - Easy web server to handle the API endpoints
 
 
 # Installtion
@@ -56,4 +58,16 @@ $ notebook olist-eda.ipynb
 
 # Install required packages
 pip install pandas numpy matplotlib plotly folium dash
+```
+
+## Running the API server
+```
+$ cd olist-eda-dashboard # (See Linux instructions, only after git clone)
+$ python3 -m venv .venv
+$ source .venv/bin/activate
+
+$ pip install -r requirements.txt
+
+# Run API server
+$ uvicorn uvicorn src.main:app --reload
 ```
