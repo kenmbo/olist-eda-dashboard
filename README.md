@@ -21,8 +21,8 @@ Currently working on the `README.md`.
 * plotly - data charts, graphs, etc.
 * folium - Rendering geospatial map for CLV and logistics.
 * dash - building and deploying web dashboard
-* [https://github.com/fastapi/fastapi](FastAPI) - API engine
-* [https://uvicorn.dev/](uvicorn)(OPTIONAL) - Easy web server to handle the API endpoints
+* [FastAPI](https://github.com/fastapi/fastapi) - API engine
+* [Uvicorn](https://uvicorn.dev/)(OPTIONAL) - Easy web server to handle the API endpoints
 
 
 # Installtion
