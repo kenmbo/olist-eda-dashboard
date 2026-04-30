@@ -24,4 +24,15 @@ def remove_outliers_iqr(df, column, group_column):
 def remove_outliers_by_category(df, column, n_std=3):
     """Removes outliers based on standard deviation for specific categories."""
     new_df = df.copy()
+    for category in df['category'].unique():
+        category_data = df[df['category'] == category]
+        mean = category_data[column].mean()
+        std = category_data[column].std()
+        lower_bound = mean - n_std * std
+        upper_bound = mean + n_std * std
+        
+        # Filter out the outliers
+        mask = (new_df['category'] == category) & ((new_df[column] < lower_bound) | (new_df[column] > upper_bound))
+        new_df = new_df[~mask]
+        
     return new_df
