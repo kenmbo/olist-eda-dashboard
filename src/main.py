@@ -152,7 +152,10 @@ def get_sales_forecast():
 @app.get("/api/shipping/stages-by-city")
 def get_shipping_stages():
     """Returns the average days for each order stage by city (Stacked Bar)."""
-    return None
+    conn = database.get_connection()
+    df = database.get_order_stage_times_top_cities(conn)
+    conn.close()
+    return df.reset_index().to_dict(orient="list")
 
 @app.get("/api/shipping/daily-average")
 def get_daily_shipping_average():
