@@ -145,3 +145,29 @@ def get_sales_regression():
 def get_sales_forecast():
     """Returns the forecasted moving average sales for December 2018."""
     return None
+
+@app.get("/api/shipping/stages-by-city")
+def get_shipping_stages():
+    """Returns the average days for each order stage by city (Stacked Bar)."""
+    return None
+
+@app.get("/api/shipping/daily-average")
+def get_daily_shipping_average():
+    """Returns daily average shipping times."""
+    return None
+
+@app.get("/api/reviews/distribution")
+def get_review_distribution():
+    """Returns the count of each review score."""
+    return None
+
+@app.get("/api/customers/rfm")
+def get_rfm_segments():
+    """Returns RFM segmentation statistics for scatter plots."""
+    return None
+
+
+@app.get("/api/customers/clv-map")
+def get_clv_map_data():
+   """Returns geographic coordinates, customer counts, and average CLV for the Mapbox graph."""
+   return None
