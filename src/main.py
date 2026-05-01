@@ -134,4 +134,9 @@ def get_monthly_sales():
 
 @app.get("/api/sales/regression")
 def get_sales_regression():
-    return None
+    """Returns slope and intercept for category sales (Trendlines)."""
+    conn = database.get_connection()
+    df = database.get_lm_per_category(conn)
+    conn.close()
+    return df.to_dict(orient="records") 
+    # orient="records" is better for reading slope/intercept objects
