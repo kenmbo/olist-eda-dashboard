@@ -144,7 +144,10 @@ def get_sales_regression():
 @app.get("/api/sales/forecast")
 def get_sales_forecast():
     """Returns the forecasted moving average sales for December 2018."""
-    return None
+    conn = database.get_connection()
+    df = database.get_forecasted_sales_dec_2018(conn)
+    conn.close()
+    return df.to_dict(orient="list")
 
 @app.get("/api/shipping/stages-by-city")
 def get_shipping_stages():
