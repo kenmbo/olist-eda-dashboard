@@ -141,9 +141,7 @@ def get_sales_regression():
     return df.to_dict(orient="records") 
     # orient="records" is better for reading slope/intercept objects
 
-@app.get("/api/sales/monthly")
-def get_monthly_sales():
-    """Returns monthly sales for selected categories (Line Graph)."""
-    conn = database.get_connection()
-    conn.close()
+@app.get("/api/sales/forecast")
+def get_sales_forecast():
+    """Returns the forecasted moving average sales for December 2018."""
     return None
