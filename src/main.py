@@ -123,7 +123,14 @@ def get_category_weights():
 
 @app.get("/api/sales/monthly")
 def get_monthly_sales():
-    return None
+"""Returns monthly sales for selected categories (Line Graph)."""
+    conn = database.get_connection()
+    df = database.get_monthly_sales_selected_categories(conn)
+    conn.close()
+    
+    # Because 'year_month' was set as the index in database.py, we reset it 
+    # so it gets included in the JSON response as a standard column.
+    return df.reset_index().to_dict(orient="list")
 
 @app.get("/api/sales/regression")
 def get_sales_regression():
