@@ -184,4 +184,7 @@ def get_rfm_segments():
 @app.get("/api/customers/clv-map")
 def get_clv_map_data():
    """Returns geographic coordinates, customer counts, and average CLV for the Mapbox graph."""
-   return None
+    conn = database.get_connection()
+    df = database.get_avg_clv_per_zip_prefix(conn)
+    conn.close()
+    return df.to_dict(orient="list")
