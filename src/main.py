@@ -168,13 +168,15 @@ def get_daily_shipping_average():
 @app.get("/api/reviews/distribution")
 def get_review_distribution():
     """Returns the count of each review score."""
-    return None
+    conn = database.get_connection()
+    df = database.get_review_score_count(conn)
+    conn.close()
+    return df.to_dict(orient="list")
 
 @app.get("/api/customers/rfm")
 def get_rfm_segments():
     """Returns RFM segmentation statistics for scatter plots."""
     return None
-
 
 @app.get("/api/customers/clv-map")
 def get_clv_map_data():
