@@ -100,7 +100,7 @@ def get_seller_shipping():
 
 @app.get("/api/orders/costs")
 def get_order_costs():
-"""Returns product and shipping costs for histograms."""
+    """Returns product and shipping costs for histograms."""
     conn = database.get_connection()
     df = database.get_order_product_and_shipping_costs(conn)
     conn.close()
@@ -123,7 +123,7 @@ def get_category_weights():
 
 @app.get("/api/sales/monthly")
 def get_monthly_sales():
-"""Returns monthly sales for selected categories (Line Graph)."""
+    """Returns monthly sales for selected categories (Line Graph)."""
     conn = database.get_connection()
     df = database.get_monthly_sales_selected_categories(conn)
     conn.close()
@@ -183,7 +183,7 @@ def get_rfm_segments():
 
 @app.get("/api/customers/clv-map")
 def get_clv_map_data():
-   """Returns geographic coordinates, customer counts, and average CLV for the Mapbox graph."""
+    """Returns geographic coordinates, customer counts, and average CLV for the Mapbox graph."""
     conn = database.get_connection()
     df = database.get_avg_clv_per_zip_prefix(conn)
     conn.close()
