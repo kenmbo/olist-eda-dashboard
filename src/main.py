@@ -176,7 +176,10 @@ def get_review_distribution():
 @app.get("/api/customers/rfm")
 def get_rfm_segments():
     """Returns RFM segmentation statistics for scatter plots."""
-    return None
+    conn = database.get_connection()
+    df = database.get_rfm_buckets(conn)
+    conn.close()
+    return df.to_dict(orient="list")
 
 @app.get("/api/customers/clv-map")
 def get_clv_map_data():
