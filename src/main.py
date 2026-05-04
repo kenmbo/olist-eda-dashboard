@@ -160,7 +160,10 @@ def get_shipping_stages():
 @app.get("/api/shipping/daily-average")
 def get_daily_shipping_average():
     """Returns daily average shipping times."""
-    return None
+    conn = database.get_connection()
+    df = database.get_daily_avg_shipping_time(conn)
+    conn.close()
+    return df.to_dict(orient="list")
 
 @app.get("/api/reviews/distribution")
 def get_review_distribution():
