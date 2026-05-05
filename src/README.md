@@ -1,0 +1,15 @@
+# Running the API server
+```
+$ git clone https://github.com/kenmbo/olist-eda-dashboard.git
+$ cd olist-eda-dashboard/
+
+# Create virtual environment (to prevent cross-contamination)
+$ python3 -m venv .venv
+$ source .venv/bin/activate
+
+# Install depndencies
+$ pip install -r requirements.txt
+
+# Run API server
+$ uvicorn uvicorn src.main:app --reload
+```
