@@ -20,5 +20,6 @@ export default function OrdersContainer() {
     );
   }
 
-  return <OrdersLineChart data={data} />;
+  return <OrdersLineChart data={data!} />;
+
 }

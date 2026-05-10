@@ -1,5 +1,5 @@
 import Plot from 'react-plotly.js';
-import { DailyOrdersResponse } from '../../types/api';
+import type { DailyOrdersResponse } from '../../types/api';
 
 interface Props {
   data: DailyOrdersResponse;
