@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchDailyOrders } from './ordersApi';
 import { DailyOrdersResponse } from '../../types/api';
 
 const fetchDailyOrders = async (): Promise<DailyOrdersResponse> => {
