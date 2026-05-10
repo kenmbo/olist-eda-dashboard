@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { DailyOrdersResponse } from '../../types/api';
+import type { DailyOrdersResponse } from '../../types/api';
 
 const fetchDailyOrders = async (): Promise<DailyOrdersResponse> => {
   const response = await fetch('http://localhost:8000/api/orders/daily');
