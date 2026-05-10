@@ -1,5 +1,9 @@
-import Plot from 'react-plotly.js';
+import Plotly from 'plotly.js-basic-dist';
+import createPlotlyComponent from 'react-plotly.js/factory';
 import type { DailyOrdersResponse } from '../../types/api';
+
+// Create a Plot component to use in a JSX
+const Plot = createPlotlyComponent.default(Plotly);
 
 interface Props {
   data: DailyOrdersResponse;
