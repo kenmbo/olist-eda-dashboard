@@ -44,3 +44,4 @@ export default function OrdersLineChart({ data }: Props) {
     </div>
   );
 }
+
