@@ -71,3 +71,17 @@ $ pip install -r requirements.txt
 # Run API server
 $ uvicorn uvicorn src.main:app --reload
 ```
+
+## Running the frontend server
+```
+cd olist-eda-dashboard/
+cd frontend/
+
+# Install depndencies
+npm install
+
+# Run server
+npm run dev
+
+#Open localhost URL in the web browser of your choice (e.g. Firefox, Chrome, etc.)
+```
