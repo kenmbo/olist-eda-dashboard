@@ -8,3 +8,8 @@ export interface CategorySalesResponse {
   sales: number[];
 }
 
+export interface SellerShippingResponse {
+  bucket: string[];
+  seller_id: string[];
+  delivery_time: number[];
+}
