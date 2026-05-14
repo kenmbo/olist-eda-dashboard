@@ -7,3 +7,4 @@ export interface CategorySalesResponse {
   category: string[];
   sales: number[];
 }
+

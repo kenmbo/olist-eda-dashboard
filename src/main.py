@@ -11,6 +11,7 @@ app = FastAPI(
 origins = [
     "http://localhost:3000",
     "http://localhost:5173",  # Default Vite port
+    "http://localhost:5174",  # Vite port + 1 (5173+1=5174), for debugging
 ]
 
 app.add_middleware(
