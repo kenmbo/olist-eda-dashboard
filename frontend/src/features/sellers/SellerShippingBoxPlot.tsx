@@ -1,15 +1,11 @@
-import type { SellerShippingResponse } from '../../types/api';
 import Plotly from 'plotly.js-dist-min';
 import createPlotlyComponent from 'react-plotly.js/factory';
+import type { SellerShippingResponse } from '../../types/api';
 
 const Plot = createPlotlyComponent.default(Plotly);
 
 interface Props {
   data: SellerShippingResponse;
-}
-
-export default function SellerShippingBoxPlot({ data }: Props) {
-  return None;
 }
 
 export default function SellerShippingBoxPlot({ data }: Props) {
@@ -25,7 +21,33 @@ export default function SellerShippingBoxPlot({ data }: Props) {
             marker: { color: '#8b5cf6' }, // Tailwind purple-500
           },
         ]}
-       />
-     </div>
-   );
+        layout={{
+          title: {
+            text: 'Delivery Time by Seller Order Volume',
+            font: { color: '#6b7280' },
+          },
+          autosize: true,
+          margin: { t: 40, r: 20, l: 40, b: 40 },
+          paper_bgcolor: 'transparent',
+          plot_bgcolor: 'transparent',
+          xaxis: {
+            title: 'Sellers with...',
+            gridcolor: '#e5e7eb',
+            tickfont: { color: '#9ca3af' },
+            // Force Plotly to display the buckets in correct numerical order
+            categoryorder: 'array',
+            categoryarray: ['1-9 orders', '10-99 orders', '100-999 orders', '1000+ orders'],
+          },
+          yaxis: {
+            title: 'Shipping time (days)',
+            gridcolor: '#e5e7eb',
+            tickfont: { color: '#9ca3af' },
+          },
+        }}
+        useResizeHandler={true}
+        style={{ width: '100%', height: '100%' }}
+        config={{ displayModeBar: false }}
+      />
+    </div>
+  );
 }
