@@ -36,7 +36,7 @@ Install a notebook viewer. I recommend Jupyter-Notebook, otherwise Google Colab 
 Once your notebook viewer is setup, open the `olist-eda.ipynb` file into your viewer.
 
 ## Linux
-```
+```bash
 # Clone repository
 $ cd ~/Downloads # (or any folder of your choice)
 $ git clone https://github.com/kenmbo/olist-eda-dashboard.git
@@ -61,15 +61,17 @@ pip install pandas numpy matplotlib plotly folium dash
 ```
 
 ## Running the API server
-```
-$ cd olist-eda-dashboard # (See Linux instructions, only after git clone)
-$ python3 -m venv .venv
-$ source .venv/bin/activate
+```bash
+cd olist-eda-dashboard # (See Linux instructions, only after git clone)
+# Create virtual environement (venv)
+python3 -m venv .venv
+source .venv/bin/activate
 
-$ pip install -r requirements.txt
+# Install dependencies
+pip install -r requirements.txt
 
 # Run API server
-$ uvicorn uvicorn src.main:app --reload
+uvicorn src.main:app --reload
 ```
 
 ## Running the frontend server
