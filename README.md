@@ -59,6 +59,11 @@ $ notebook olist-eda.ipynb
 # Install required packages
 pip install pandas numpy matplotlib plotly folium dash
 ```
+### Why do I need to make a virtual environemt?
+Basically, for python, it's a good practice.
+Venvs can isolate projects from another.
+See the following blog article from SAS:
+[https://blogs.sas.com/content/sgf/2025/03/14/how-to-create-and-manage-python-virtual-environments/](https://blogs.sas.com/content/sgf/2025/03/14/how-to-create-and-manage-python-virtual-environments/)
 
 ## Running the API server
 ```bash
@@ -75,7 +80,7 @@ uvicorn src.main:app --reload
 ```
 
 ## Running the frontend server
-```
+```bash
 cd olist-eda-dashboard/
 cd frontend/
 
@@ -85,5 +90,5 @@ npm install
 # Run server
 npm run dev
 
-#Open localhost URL in the web browser of your choice (e.g. Firefox, Chrome, etc.)
+# Open localhost URL in the web browser of your choice (e.g. Firefox, Chrome, etc.)
 ```
