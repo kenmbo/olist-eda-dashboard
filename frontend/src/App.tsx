@@ -29,6 +29,7 @@ function App() {
         <main className="grid grid-cols-1 gap-8">
           <OrdersContainer />
 	  <CategoryContainer />
+	  <SellerShippingContainer />
           
           {/*  Commentting these widgets for now
               <SalesCategoriesContainer />
