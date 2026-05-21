@@ -28,6 +28,7 @@ function App() {
         {/* Dashboard Grid */}
         <main className="grid grid-cols-1 gap-8">
           <OrdersContainer />
+	  <CategoryContainer />
           
           {/*  Commentting these widgets for now
               <SalesCategoriesContainer />
