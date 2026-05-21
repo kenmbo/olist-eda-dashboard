@@ -1,19 +1,26 @@
+import { BarChart3, Truck, PackageSearch } from 'lucide-react';
+
+// Define the tabs available in your dashboard
+export type TabType = 'orders' | 'categories' | 'delivery';
+
 interface Props {
   activeTab: TabType;
   setActiveTab: (tab: TabType) => void;
 }
 
-export type TabType = 'orders' | 'categories' | 'delivery';
-
 export default function Sidebar({ activeTab, setActiveTab }: Props) {
   const navItems = [
-    { id: 'orders', label: 'Order Analysis'},
-    { id: 'categories', label: 'Top Categories'},
-    { id: 'delivery', label: 'Delivery & Shipping'},
+    { id: 'orders', label: 'Order Analysis', icon: BarChart3 },
+    { id: 'categories', label: 'Top Categories', icon: PackageSearch },
+    { id: 'delivery', label: 'Delivery & Shipping', icon: Truck },
   ] as const;
 
-return (
-    <aside>
+  return (
+    <aside className="w-64 bg-gray-900 text-white h-screen fixed left-0 top-0 flex flex-col">
+      <div className="p-6 border-b border-gray-800">
+        <h2 className="text-2xl font-bold tracking-tight">Olist App</h2>
+      </div>
+      
       <nav className="flex-1 py-6 space-y-2 px-4">
         {navItems.map((item) => {
           const Icon = item.icon;
