@@ -3,7 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
-import Sidebar, { TabType } from './components/common/Sidebar';
+import Sidebar from './components/common/Sidebar';
+import type { TabType } from './components/common/Sidebar';
 import OrdersContainer from './features/orders/OrdersContainer.tsx'
 import CategoryContainer from './features/categories/CategoryContainer.tsx'
 import SellerShippingContainer from './features/sellers/SellerShippingContainer';
