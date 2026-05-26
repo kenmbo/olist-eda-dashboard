@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import './App.css';
 import Sidebar from './components/common/Sidebar';
 import type { TabType } from './components/common/Sidebar';
 import OrdersContainer from './features/orders/OrdersContainer.tsx'
