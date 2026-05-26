@@ -6,6 +6,7 @@ This will be then visualized through a dashboard onto a web browser by utilizing
 Currently working on the `README.md`.
 
 # TODO
+* Create seperate dependencies list (`requirements.txt`) for the API server.
 * Note to self, project directory is in: `~/python/`.
 * __Show some pictures!__
 * Finish API implementations of src/database.py.
