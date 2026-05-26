@@ -1,3 +1,4 @@
+Dependencies: sqlite3, sys, pandas, fastapi, uvicorn
 # Running the API server
 ```bash
 git clone https://github.com/kenmbo/olist-eda-dashboard.git
@@ -8,7 +9,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 
 # Install depndencies
-pip install -r requirements.txt
+pip install pandas fastapi uvicorn
 
 # Run API server
 uvicorn src.main:app --reload

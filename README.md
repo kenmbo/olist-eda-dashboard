@@ -73,8 +73,9 @@ cd olist-eda-dashboard # (See Linux instructions, only after git clone)
 python3 -m venv .venv
 source .venv/bin/activate
 
-# Install dependencies
-pip install -r requirements.txt
+# Install dependencies 
+# (Pandas for data processing, FastAPI for API state management, Uvicorn for fast web server setup.
+pip install pandas fastapi uvicorn
 
 # Run API server
 uvicorn src.main:app --reload
