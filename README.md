@@ -79,7 +79,10 @@ pip install pandas fastapi uvicorn
 
 # Run API server
 uvicorn src.main:app --reload
+
 ```
+
+![Web server (Uvicorn) displaying API request statuses to the terminal emulator. The 200 OK status codes means the requests are successfully processed.](docs/screenshot-api-server.png)
 
 ## Running the frontend server
 ```bash
