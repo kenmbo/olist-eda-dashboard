@@ -17,7 +17,7 @@ function App() {
       <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {/* Main Content Area - notice the ml-64 to offset the fixed 64-width sidebar */}
-      <main className="flex-1 ml-64 overflow-y-auto p-8">
+      <main className="flex-1 overflow-y-auto p-8">
         
         <header className="mb-8 border-b border-gray-200 pb-4">
           <h1 className="text-3xl font-bold text-gray-900 capitalize">
