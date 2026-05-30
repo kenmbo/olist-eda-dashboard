@@ -4,6 +4,7 @@ import type { TabType } from './components/common/Sidebar';
 import OrdersContainer from './features/orders/OrdersContainer.tsx'
 import CategoryContainer from './features/categories/CategoryContainer.tsx'
 import SellerShippingContainer from './features/sellers/SellerShippingContainer';
+import OrdersHeatmapContainer from './features/orders/OrdersHeatmapContainer';
 
 function App() {
   // State to track which tab is currently selected
@@ -28,9 +29,22 @@ function App() {
 
         {/* Conditionally render containers based on the active tab */}
         <div className="grid grid-cols-1 gap-8 max-w-7xl">
-          {activeTab === 'orders' && <OrdersContainer />}
+
+	{/* =======ORDERS======= */}
+	  {activeTab === 'orders' && (
+            <>
+              {/* This renders both charts when the Orders tab is active */}
+              <OrdersContainer />
+              <OrdersHeatmapContainer />
+            </>
+          )}
+
+	{/* =======CATEGORIES======= */}
           {activeTab === 'categories' && <CategoryContainer />}
+
+	{/* =======DELIVERY======= */}
           {activeTab === 'delivery' && <SellerShippingContainer />}
+
         </div>
         
       </main>
