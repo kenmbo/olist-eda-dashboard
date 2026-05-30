@@ -20,3 +20,8 @@ export interface SellerShippingResponse {
   delivery_time: number[];
 }
 
+export interface OrderCostsResponse {
+  order_id: string[];
+  product_cost: number[];
+  shipping_cost: number[];
+}
