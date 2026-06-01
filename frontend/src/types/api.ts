@@ -25,3 +25,12 @@ export interface OrderCostsResponse {
   product_cost: number[];
   shipping_cost: number[];
 }
+
+export interface CustomerMapResponse {
+  zip_prefix: number[];
+  avg_CLV: number[];
+  customer_count: number[];
+  latitude: number[];
+  longitude: number[];
+}
+
