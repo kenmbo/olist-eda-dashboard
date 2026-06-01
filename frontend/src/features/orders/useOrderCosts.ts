@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import type { OrderCostsResponse } from '../../types/api';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
@@ -9,5 +10,9 @@ const fetchOrderCosts = async (): Promise<OrderCostsResponse> => {
 };
 
 export const useOrderCosts = () => {
-     return fetchOrderCosts;
+  return useQuery({
+    queryKey: ['orderCosts'],
+    queryFn: fetchOrderCosts,
+    staleTime: 1000 * 60 * 5,
+  });
 };
