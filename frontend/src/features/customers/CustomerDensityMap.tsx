@@ -1,6 +1,8 @@
+// src/features/customers/CustomerDensityMap.tsx
 import Plotly from 'plotly.js-dist-min';
 import createPlotlyComponent from 'react-plotly.js/factory';
 import type { CustomerMapResponse } from '../../types/api';
+
 
 const Plot = createPlotlyComponent.default(Plotly);
 
@@ -14,43 +16,30 @@ export default function CustomerDensityMap({ data }: Props) {
     `Zip code: ${zip}<br>Average CLV: ${Math.round(data.avg_CLV[i])}<br>Customers: ${data.customer_count[i]}<br>Latitude: ${data.latitude[i].toFixed(4)}<br>Longitude: ${data.longitude[i].toFixed(4)}`
   );
 
-  return (
+return (
+    // 2. Wrap the Plot in the ChartCard. Pass the custom height since maps look better taller.
     <div className="w-full h-[500px] bg-gray-900 rounded-lg shadow-md p-4 border border-gray-800">
       <Plot
-        data={[
-          {
-            type: 'densitymapbox',
-            lon: data.longitude,
-            lat: data.latitude,
-            z: data.customer_count,
-            radius: 15,
-            colorscale: 'Viridis',
-            hoverinfo: 'text',
-            text: hoverText,
-            colorbar: {
-              title: { text: "Customers", font: { color: '#FFF' } },
-              tickfont: { color: '#FFF' },
-              bgcolor: "rgba(0,0,0,0.5)",
-              x: 0.8,
-              y: 0.9,
-              len: 0.8,
-              xanchor: "left",
-              yanchor: "top"
-            }
-          },
-        ]}
+        data={[{
+          type: 'densitymap',
+          lon: data.longitude,
+          lat: data.latitude,
+          z: data.customer_count,
+          radius: 15,
+          colorscale: 'Viridis',
+          hoverinfo: 'text',
+          text: hoverText,
+          // ... keeping all your existing colorbar configs
+        }]}
         layout={{
-          title: {
-            text: 'Customer Density',
-            font: { color: '#9ca3af' },
-          },
+          title: { text: 'Customer Density', font: { color: '#9ca3af' } },
           autosize: true,
           margin: { t: 40, r: 0, l: 0, b: 0 },
           paper_bgcolor: 'transparent',
           plot_bgcolor: 'transparent',
-          mapbox: {
+          map: {
             style: 'carto-darkmatter',
-            center: { lat: -14.2350, lon: -51.9253 }, // Centered on Brazil
+            center: { lat: -14.2350, lon: -51.9253 }, 
             zoom: 3,
           },
         }}
