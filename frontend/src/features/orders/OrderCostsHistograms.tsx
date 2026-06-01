@@ -47,7 +47,7 @@ export default function OrderCostsHistograms({ data }: Props) {
               title: 'Product cost (BRL)',
               gridcolor: '#374151',
               tickfont: { color: '#9ca3af' },
-              range: [0, 500], // Filtering the view just like the Python script
+              range: [0, 500],
             },
           }}
           useResizeHandler={true}
@@ -55,6 +55,37 @@ export default function OrderCostsHistograms({ data }: Props) {
           config={{ displayModeBar: false }}
         />
       </div>
+
+      {/* Right Chart: Shipping Cost */}
+      <div className="h-96 bg-gray-900 rounded-lg shadow-md p-4 border border-gray-800">
+        <Plot
+          data={[
+            {
+              x: data.shipping_cost,
+              type: 'histogram',
+              nbinsx: 800,
+              marker: { color: '#ad865f' },
+            },
+          ]}
+          layout={{
+            ...sharedLayout,
+            title: {
+              text: 'Shipping cost for orders < R$80',
+              font: { color: '#9ca3af' },
+            },
+            xaxis: {
+              title: 'Shipping cost (BRL)',
+              gridcolor: '#374151',
+              tickfont: { color: '#9ca3af' },
+              range: [0, 80], // Filtering the view
+            },
+          }}
+          useResizeHandler={true}
+          style={{ width: '100%', height: '100%' }}
+          config={{ displayModeBar: false }}
+        />
+      </div>
+
     </div>
   );
 }
