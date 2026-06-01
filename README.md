@@ -60,6 +60,9 @@ $ notebook olist-eda.ipynb
 # Install required packages
 pip install pandas numpy matplotlib plotly folium dash
 ```
+
+![The project olist-eda-dashboard through Jupyter Notebook. There is a code block which which configures MatPlotLib line graph. Below the code block is the line graph which shows the monthly sales for different categories from health products to toys to electronics. Health products are the biggest sellers for the Olist e-commerce business.](docs/screenshot-notebook.png)
+
 ### Why do I need to make a virtual environemt?
 Basically, for python, it's a good practice.
 Venvs can isolate projects from another.
