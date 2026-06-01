@@ -6,6 +6,7 @@ import CategoryContainer from './features/categories/CategoryContainer.tsx'
 import SellerShippingContainer from './features/sellers/SellerShippingContainer';
 import OrdersHeatmapContainer from './features/orders/OrdersHeatmapContainer';
 import OrderCostsContainer from './features/orders/OrderCostsContainer';
+import CustomerMapContainer from './features/customers/CustomerDensityMap';
 
 function App() {
   // State to track which tab is currently selected
@@ -37,6 +38,7 @@ function App() {
               {/* This renders both charts when the Orders tab is active */}
               <OrdersContainer />
               <OrdersHeatmapContainer />
+              <CustomerMapContainer />
               <OrderCostsContainer />
             </>
           )}
