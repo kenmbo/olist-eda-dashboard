@@ -43,10 +43,15 @@ function App() {
 
 	{/* =======CATEGORIES======= */}
           {activeTab === 'categories' && <CategoryContainer />}
-
+	  
 	{/* =======DELIVERY======= */}
           {activeTab === 'delivery' && <SellerShippingContainer />}
 
+       {/* =======SELLERS======= */}
+	  {activeTab === 'sellers' && <div className="text-gray-500">Sellers & Leads charts coming soon...</div>}
+
+       {/* =======PREDICTIONS======= */}
+{activeTab === 'predictions' && <div className="text-gray-500">Predictions & RFM charts coming soon...</div>}
         </div>
         
       </main>
