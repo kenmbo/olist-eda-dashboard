@@ -1,6 +1,7 @@
 import Plotly from 'plotly.js-dist-min';
 import createPlotlyComponent from 'react-plotly.js/factory';
 import type { SellerShippingResponse } from '../../types/api';
+import ChartCard from '../../components/common/ChartCard';
 
 const Plot = createPlotlyComponent.default(Plotly);
 
@@ -10,7 +11,7 @@ interface Props {
 
 export default function SellerShippingBoxPlot({ data }: Props) {
   return (
-    <div className="w-full h-96 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
+     <ChartCard>
       <Plot
         data={[
           {
@@ -48,6 +49,6 @@ export default function SellerShippingBoxPlot({ data }: Props) {
         style={{ width: '100%', height: '100%' }}
         config={{ displayModeBar: false }}
       />
-    </div>
+     </ChartCard>
   );
 }

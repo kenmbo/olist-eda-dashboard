@@ -2,6 +2,7 @@
 import Plotly from 'plotly.js-dist-min';
 import createPlotlyComponent from 'react-plotly.js/factory';
 import type { CustomerMapResponse } from '../../types/api';
+import ChartCard from '../../components/common/ChartCard';
 
 const Plot = createPlotlyComponent.default(Plotly);
 
@@ -17,7 +18,7 @@ export default function CustomerDensityMap({ data }: Props) {
 
 return (
     // TODO Make a chart card
-    <div className="w-full h-[500px] bg-gray-900 rounded-lg shadow-md p-4 border border-gray-800">
+    <ChartCard heightClass="h-[500px]">
       <Plot
         data={[{
           type: 'densitymap',
@@ -46,6 +47,6 @@ return (
         style={{ width: '100%', height: '100%' }}
         config={{ displayModeBar: false }}
       />
-    </div>
+    </ChartCard>
   );
 }

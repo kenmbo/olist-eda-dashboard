@@ -1,6 +1,7 @@
 import Plotly from 'plotly.js-basic-dist';
 import createPlotlyComponent from 'react-plotly.js/factory';
 import type { DailyOrdersResponse } from '../../types/api';
+import ChartCard from '../../components/common/ChartCard';
 
 // Create a Plot component to use in a JSX
 const Plot = createPlotlyComponent.default(Plotly);
@@ -12,7 +13,7 @@ interface Props {
 export default function OrdersLineChart({ data }: Props) {
   return (
     // Tailwind styling for the chart container
-    <div className="w-full h-96 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
+    <ChartCard>
       <Plot
         data={[
           {
@@ -45,7 +46,7 @@ export default function OrdersLineChart({ data }: Props) {
         style={{ width: '100%', height: '100%' }}
         config={{ displayModeBar: false }} // Hides the Plotly toolbar for a cleaner look
       />
-    </div>
+    </ChartCard>
   );
 }
 

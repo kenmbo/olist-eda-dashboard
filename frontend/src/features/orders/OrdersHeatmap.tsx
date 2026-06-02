@@ -1,6 +1,7 @@
 import Plotly from 'plotly.js-dist-min';
 import createPlotlyComponent from 'react-plotly.js/factory';
 import type { HourlyOrdersResponse } from '../../types/api';
+import ChartCard from '../../components/common/ChartCard';
 
 const Plot = createPlotlyComponent.default(Plotly);
 
@@ -10,7 +11,7 @@ interface Props {
 
 export default function OrdersHeatmap({ data }: Props) {
   return (
-    <div className="w-full h-96 bg-gray-900 rounded-lg shadow-md p-4 border border-gray-800">
+    <ChartCard>
       <Plot
         data={[
           {
@@ -46,6 +47,6 @@ export default function OrdersHeatmap({ data }: Props) {
         style={{ width: '100%', height: '100%' }}
         config={{ displayModeBar: false }}
       />
-    </div>
+    </ChartCard>
   );
 }

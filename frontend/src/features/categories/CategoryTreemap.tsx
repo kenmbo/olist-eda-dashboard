@@ -1,6 +1,7 @@
 import Plotly from 'plotly.js-dist-min';
 import createPlotlyComponent from 'react-plotly.js/factory';
 import type { CategorySalesResponse } from '../../types/api';
+import ChartCard from '../../components/common/ChartCard';
 
 const Plot = createPlotlyComponent.default(Plotly);
 
@@ -14,7 +15,7 @@ export default function CategoryTreemap({ data }: Props) {
   const parents = Array(data.category.length).fill('');
 
   return (
-    <div className="w-full h-96 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
+     <ChartCard>
       <Plot
         data={[
           {
@@ -45,6 +46,6 @@ export default function CategoryTreemap({ data }: Props) {
         style={{ width: '100%', height: '100%' }}
         config={{ displayModeBar: false }}
       />
-    </div>
+    </ChartCard>
   );
 }

@@ -1,6 +1,7 @@
 import Plotly from 'plotly.js-dist-min';
 import createPlotlyComponent from 'react-plotly.js/factory';
 import type { OrderCostsResponse } from '../../types/api';
+import ChartCard from '../../components/common/ChartCard';
 
 const Plot = createPlotlyComponent.default(Plotly);
 
@@ -27,7 +28,7 @@ export default function OrderCostsHistograms({ data }: Props) {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
       
       {/* Left Chart: Product Cost */}
-      <div className="h-96 bg-gray-900 rounded-lg shadow-md p-4 border border-gray-800">
+      <ChartCard>
         <Plot
           data={[
             {
@@ -54,10 +55,10 @@ export default function OrderCostsHistograms({ data }: Props) {
           style={{ width: '100%', height: '100%' }}
           config={{ displayModeBar: false }}
         />
-      </div>
+      </ChartCard>
 
       {/* Right Chart: Shipping Cost */}
-      <div className="h-96 bg-gray-900 rounded-lg shadow-md p-4 border border-gray-800">
+     <ChartCard>
         <Plot
           data={[
             {
@@ -84,7 +85,7 @@ export default function OrderCostsHistograms({ data }: Props) {
           style={{ width: '100%', height: '100%' }}
           config={{ displayModeBar: false }}
         />
-      </div>
+      </ChartCard>
 
     </div>
   );
