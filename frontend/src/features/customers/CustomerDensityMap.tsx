@@ -3,7 +3,6 @@ import Plotly from 'plotly.js-dist-min';
 import createPlotlyComponent from 'react-plotly.js/factory';
 import type { CustomerMapResponse } from '../../types/api';
 
-
 const Plot = createPlotlyComponent.default(Plotly);
 
 interface Props {
@@ -17,7 +16,7 @@ export default function CustomerDensityMap({ data }: Props) {
   );
 
 return (
-    // 2. Wrap the Plot in the ChartCard. Pass the custom height since maps look better taller.
+    // TODO Make a chart card
     <div className="w-full h-[500px] bg-gray-900 rounded-lg shadow-md p-4 border border-gray-800">
       <Plot
         data={[{

@@ -6,7 +6,7 @@ import CategoryContainer from './features/categories/CategoryContainer.tsx'
 import SellerShippingContainer from './features/sellers/SellerShippingContainer';
 import OrdersHeatmapContainer from './features/orders/OrdersHeatmapContainer';
 import OrderCostsContainer from './features/orders/OrderCostsContainer';
-import CustomerMapContainer from './features/customers/CustomerDensityMap';
+import CustomerMapContainer from './features/customers/CustomerMapContainer';
 
 function App() {
   // State to track which tab is currently selected
@@ -30,32 +30,60 @@ function App() {
         </header>
 
         {/* Conditionally render containers based on the active tab */}
-        <div className="grid grid-cols-1 gap-8 max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-7xl">
 
 	{/* =======ORDERS======= */}
-	  {activeTab === 'orders' && (
+	{activeTab === 'orders' && (
             <>
-              {/* This renders both charts when the Orders tab is active */}
-              <OrdersContainer />
-              <OrdersHeatmapContainer />
-              <CustomerMapContainer />
-              <OrderCostsContainer />
+              {/* Spans all 12 columns */}
+              <div className="col-span-1 lg:col-span-12">
+                <OrdersContainer />
+              </div>
+              
+              <div className="col-span-1 lg:col-span-12">
+                <CustomerMapContainer />
+              </div>
+              
+              <div className="col-span-1 lg:col-span-12">
+                <OrdersHeatmapContainer />
+              </div>
+              
+              <div className="col-span-1 lg:col-span-12">
+                <OrderCostsContainer />
+              </div>
             </>
           )}
 
+
 	{/* =======CATEGORIES======= */}
-          {activeTab === 'categories' && <CategoryContainer />}
-	  
+	{activeTab === 'categories' && (
+             <div className="col-span-1 lg:col-span-12">
+		<CategoryContainer />
+	     </div>
+        )}
+
 	{/* =======DELIVERY======= */}
-          {activeTab === 'delivery' && <SellerShippingContainer />}
+	{activeTab === 'delivery' && (
+             <div className="col-span-1 lg:col-span-12">
+		<SellerShippingContainer />
+	     </div>
+        )}
 
        {/* =======SELLERS======= */}
-	  {activeTab === 'sellers' && <div className="text-gray-500">Sellers & Leads charts coming soon...</div>}
+       {activeTab === 'sellers' && 
+             <div className="col-span-12 text-gray-500">
+		Sellers & Leads charts coming soon...
+	     </div>
+       }
 
        {/* =======PREDICTIONS======= */}
-{activeTab === 'predictions' && <div className="text-gray-500">Predictions & RFM charts coming soon...</div>}
-        </div>
-        
+       {activeTab === 'predictions' && 
+	     <div className="text-gray-500">
+		Predictions & RFM charts coming soon...
+	    </div>
+       }
+
+       </div> 
       </main>
     </div>
   );
