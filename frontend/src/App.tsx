@@ -14,23 +14,23 @@ function App() {
 
   return (
     // Flex container to hold the sidebar and main content
-    <div className="flex h-screen bg-gray-100 overflow-hidden">
+    <div className="flex h-screen bg-gray-950 text-white overflow-hidden">
       
       {/* Sidebar Component */}
       <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
-      {/* Main Content Area - notice the ml-64 to offset the fixed 64-width sidebar */}
+      {/* Main Content Area */}
       <main className="flex-1 overflow-y-auto p-8">
         
-        <header className="mb-8 border-b border-gray-200 pb-4">
-          <h1 className="text-3xl font-bold text-gray-900 capitalize">
+        <header className="mb-2 border-b border-gray-400">
+          <h1 className="text-3xl font-bold text-gray-200 capitalize">
             {/* Make the header dynamically match the tab */}
             {activeTab.replace('-', ' ')} Dashboard
           </h1>
         </header>
 
         {/* Conditionally render containers based on the active tab */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-7xl w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 max-w-7xl w-full">
 
 	{/* =======ORDERS======= */}
 	{activeTab === 'orders' && (
