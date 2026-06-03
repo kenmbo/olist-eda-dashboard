@@ -28,7 +28,7 @@ export default function OrderCostsHistograms({ data }: Props) {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
       
       {/* Left Chart: Product Cost */}
-      <ChartCard>
+      <ChartCard heightClass="h-64">
         <Plot
           data={[
             {
@@ -58,7 +58,7 @@ export default function OrderCostsHistograms({ data }: Props) {
       </ChartCard>
 
       {/* Right Chart: Shipping Cost */}
-     <ChartCard>
+     <ChartCard heightClass="h-64">
         <Plot
           data={[
             {

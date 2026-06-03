@@ -18,7 +18,7 @@ export default function CustomerDensityMap({ data }: Props) {
 
 return (
     // TODO Make a chart card
-    <ChartCard heightClass="h-[500px]">
+    <ChartCard heightClass="h-72">
       <Plot
         data={[{
           type: 'densitymap',

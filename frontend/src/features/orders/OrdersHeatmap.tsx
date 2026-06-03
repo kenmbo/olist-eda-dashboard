@@ -11,7 +11,7 @@ interface Props {
 
 export default function OrdersHeatmap({ data }: Props) {
   return (
-    <ChartCard>
+    <ChartCard heightClass="h-72">
       <Plot
         data={[
           {

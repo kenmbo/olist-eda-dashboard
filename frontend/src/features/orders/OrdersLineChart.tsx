@@ -13,7 +13,7 @@ interface Props {
 export default function OrdersLineChart({ data }: Props) {
   return (
     // Tailwind styling for the chart container
-    <ChartCard>
+    <ChartCard heightClass="h-72">
       <Plot
         data={[
           {
