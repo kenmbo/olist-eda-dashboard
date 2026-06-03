@@ -33,12 +33,16 @@ export default function OrdersLineChart({ data }: Props) {
           margin: { t: 40, r: 20, l: 40, b: 40 },
           paper_bgcolor: 'transparent', // Let the Tailwind bg color show through
           plot_bgcolor: 'transparent',
-          xaxis: { 
-            gridcolor: '#e5e7eb', // Tailwind gray-200
-            tickfont: { color: '#9ca3af' }
+          xaxis: {
+            gridcolor: '#555', // Tailwind gray-200
+            showzeroline: 'true',
+            zerolinecolor: '#ff0000',
+            zerolinewidth: 2,
+            tickfont: { color: 'white' },
           },
           yaxis: { 
-            gridcolor: '#e5e7eb',
+            gridcolor: '#444',
+            griddash: 'dot',
             tickfont: { color: '#9ca3af' }
           },
         }}
