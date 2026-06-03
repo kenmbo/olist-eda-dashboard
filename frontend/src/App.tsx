@@ -36,17 +36,17 @@ function App() {
 	{activeTab === 'orders' && (
             <>
               {/* Top Row: Line Chart gets 8 columns (wider), Map gets 4 columns (narrower) */}
-              <div className="col-span-1 lg:col-span-8">
+              <div className="col-span-1 lg:col-span-6">
                 <OrdersContainer />
               </div>
               
-              <div className="col-span-1 lg:col-span-4">
-                <CustomerMapContainer />
+              <div className="col-span-1 lg:col-span-6">
+                <OrdersHeatmapContainer />
               </div>
               
               {/* Middle Row: Heatmap spans all 12 columns so the timeline is readable */}
               <div className="col-span-1 lg:col-span-12">
-                <OrdersHeatmapContainer />
+                <CustomerMapContainer />
               </div>
               
               {/* Bottom Row: The OrderCostsContainer handles its own 50/50 split internally, 
@@ -56,9 +56,6 @@ function App() {
               </div>
             </>
 	)}
-
-          {/* ... rest of your tabs ... */}
-
 
 	{/* =======CATEGORIES======= */}
 	{activeTab === 'categories' && (
