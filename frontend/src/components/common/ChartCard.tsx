@@ -1,5 +1,5 @@
 // src/components/common/ChartCard.tsx
-import { useState, ReactNode } from 'react';
+import { useState, useEffect, ReactNode } from 'react';
 import { Maximize2, Minimize2 } from 'lucide-react';
 
 interface Props {
@@ -10,12 +10,22 @@ interface Props {
 export default function ChartCard({ children, heightClass = 'h-96' }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
 
+  /* This effect artificially triggers a window.resize event 
+   * (Plotly's useResizeHandler listens to this window.resize event) */
+  useEffect(() => {
+    // Wait for the 300ms CSS transition to finish, then tell Plotly to resize
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 300);
+    // Cleanup the timer if the component unmounts quickly
+    return () => clearTimeout(timer);
+  }, [isExpanded]);
+
+
   // The base styling shared by both states
-  const baseClasses = "bg-gray-900 rounded-lg shadow-md border border-gray-800 group flex flex-col transition-all duration-300";
-  
+  const baseClasses = "bg-gray-900 rounded-lg shadow-md border border-gray-800 group flex flex-col transition-all duration-300";  
   // Sits inside the grid
   const normalClasses = `relative w-full p-4 ${heightClass} ${baseClasses}`;
-  
   // Floats over the entire screen
   const expandedClasses = `fixed inset-4 z-50 p-6 ${baseClasses}`;
 
