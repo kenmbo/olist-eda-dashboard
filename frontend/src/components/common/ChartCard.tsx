@@ -11,13 +11,13 @@ export default function ChartCard({ children, heightClass = 'h-96' }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   // The base styling shared by both states
-  const baseClasses = "bg-gray-900 rounded-lg shadow-md border border-gray-800 relative group flex flex-col transition-all duration-200";
+  const baseClasses = "bg-gray-900 rounded-lg shadow-md border border-gray-800 group flex flex-col transition-all duration-300";
   
   // Sits inside the grid
-  const normalClasses = `w-full p-4 ${heightClass} ${baseClasses}`; 
+  const normalClasses = `relative w-full p-4 ${heightClass} ${baseClasses}`;
   
   // Floats over the entire screen
-  const expandedClasses = `fixed inset-4 z-50 p-6 ${baseClasses}`; 
+  const expandedClasses = `fixed inset-4 z-50 p-6 ${baseClasses}`;
 
   return (
     <>
@@ -35,14 +35,18 @@ export default function ChartCard({ children, heightClass = 'h-96' }: Props) {
         {/* The Toggle Button (Appears on hover) */}
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="absolute top-4 right-4 z-10 p-2 text-gray-500 hover:text-white bg-gray-800/80 hover:bg-gray-700 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+          // Force the button to be opacity-100 when expanded so it's always visible
+          className={`absolute top-4 right-4 z-50 p-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded-md transition-opacity duration-200 ${
+            isExpanded ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+          }`}
           aria-label={isExpanded ? "Minimize" : "Maximize"}
         >
           {isExpanded ? <Minimize2 size={18} /> : <Maximize2 size={18} />}
         </button>
 
         {/* The Chart (Plotly) */}
-        <div className="flex-1 w-full h-full relative">
+	{/* Added overflow-hidden to prevent Plotly from spilling during transitions.*/}
+        <div className="flex-1 w-full h-full relative overflow-hidden">
           {children}
         </div>
       </div>
