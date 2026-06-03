@@ -30,29 +30,34 @@ function App() {
         </header>
 
         {/* Conditionally render containers based on the active tab */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-7xl w-full">
 
 	{/* =======ORDERS======= */}
 	{activeTab === 'orders' && (
             <>
-              {/* Spans all 12 columns */}
-              <div className="col-span-1 lg:col-span-12">
+              {/* Top Row: Line Chart gets 8 columns (wider), Map gets 4 columns (narrower) */}
+              <div className="col-span-1 lg:col-span-8">
                 <OrdersContainer />
               </div>
               
-              <div className="col-span-1 lg:col-span-12">
+              <div className="col-span-1 lg:col-span-4">
                 <CustomerMapContainer />
               </div>
               
+              {/* Middle Row: Heatmap spans all 12 columns so the timeline is readable */}
               <div className="col-span-1 lg:col-span-12">
                 <OrdersHeatmapContainer />
               </div>
               
+              {/* Bottom Row: The OrderCostsContainer handles its own 50/50 split internally, 
+                  so we give its parent wrapper the full 12 columns */}
               <div className="col-span-1 lg:col-span-12">
                 <OrderCostsContainer />
               </div>
             </>
-          )}
+	)}
+
+          {/* ... rest of your tabs ... */}
 
 
 	{/* =======CATEGORIES======= */}
