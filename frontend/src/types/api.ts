@@ -34,3 +34,8 @@ export interface CustomerMapResponse {
   longitude: number[];
 }
 
+export interface CategoryMonthlySalesResponse {
+  index: string[];    // The months (e.g., '2017-01', '2017-02')
+  columns: string[];  // The category names
+  data: number[][];   // 2D array: rows are months, columns are sales for that category
+}
