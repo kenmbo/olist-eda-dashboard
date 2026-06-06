@@ -5,9 +5,10 @@ import { Maximize2, Minimize2 } from 'lucide-react';
 interface Props {
   children: ReactNode;
   heightClass?: string; // Allows custom heights (e.g., 'h-[500px]' for the map)
+  title?: string; // Deocouple plotly's title tag into an HTML element
 }
 
-export default function ChartCard({ children, heightClass = 'h-96' }: Props) {
+export default function ChartCard({ children, heightClass = 'h-96', title }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   /* This effect artificially triggers a window.resize event 
@@ -53,6 +54,13 @@ export default function ChartCard({ children, heightClass = 'h-96' }: Props) {
         >
           {isExpanded ? <Minimize2 size={18} /> : <Maximize2 size={18} />}
         </button>
+	
+	{/* Render the Native HTML Title */}
+        {title && (
+          <h3 className="text-lg font-semibold text-gray-100 mb-2 pr-10 z-10">
+            {title}
+          </h3>
+        )}
 
         {/* The Chart (Plotly) */}
 	{/* Added overflow-hidden to prevent Plotly from spilling during transitions.*/}
