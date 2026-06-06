@@ -11,7 +11,7 @@ interface Props {
 
 export default function OrdersHeatmap({ data }: Props) {
   return (
-    <ChartCard heightClass="h-72">
+    <ChartCard heightClass="h-72" title="Orders by Day and Hour">
       <Plot
         data={[
           {
@@ -24,10 +24,6 @@ export default function OrdersHeatmap({ data }: Props) {
           },
         ]}
         layout={{
-          title: {
-            text: 'Orders by Day and Hour',
-            font: { color: '#9ca3af' }, // Tailwind gray-400
-          },
           autosize: true,
           margin: { t: 40, r: 20, l: 40, b: 40 },
           paper_bgcolor: 'transparent',

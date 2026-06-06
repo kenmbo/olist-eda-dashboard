@@ -17,8 +17,7 @@ export default function CustomerDensityMap({ data }: Props) {
   );
 
 return (
-    // TODO Make a chart card
-    <ChartCard heightClass="h-72">
+    <ChartCard heightClass="h-72" title="Customer Density">
       <Plot
         data={[{
           type: 'densitymap',
@@ -32,7 +31,6 @@ return (
           // ... keeping all your existing colorbar configs
         }]}
         layout={{
-          title: { text: 'Customer Density', font: { color: '#9ca3af' } },
           autosize: true,
           margin: { t: 40, r: 0, l: 0, b: 0 },
           paper_bgcolor: 'transparent',

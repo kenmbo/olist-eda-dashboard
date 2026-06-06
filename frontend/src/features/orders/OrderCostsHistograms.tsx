@@ -28,7 +28,7 @@ export default function OrderCostsHistograms({ data }: Props) {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
       
       {/* Left Chart: Product Cost */}
-      <ChartCard heightClass="h-64">
+      <ChartCard heightClass="h-64" title="Product cost for orders < R$500">
         <Plot
           data={[
             {
@@ -40,10 +40,6 @@ export default function OrderCostsHistograms({ data }: Props) {
           ]}
           layout={{
             ...sharedLayout,
-            title: {
-              text: 'Product cost for orders < R$500',
-              font: { color: '#9ca3af' },
-            },
             xaxis: {
               title: 'Product cost (BRL)',
               gridcolor: '#374151',
@@ -58,7 +54,7 @@ export default function OrderCostsHistograms({ data }: Props) {
       </ChartCard>
 
       {/* Right Chart: Shipping Cost */}
-     <ChartCard heightClass="h-64">
+     <ChartCard heightClass="h-64" title="Shipping cost for orders < R$580">
         <Plot
           data={[
             {
@@ -70,10 +66,6 @@ export default function OrderCostsHistograms({ data }: Props) {
           ]}
           layout={{
             ...sharedLayout,
-            title: {
-              text: 'Shipping cost for orders < R$80',
-              font: { color: '#9ca3af' },
-            },
             xaxis: {
               title: 'Shipping cost (BRL)',
               gridcolor: '#374151',

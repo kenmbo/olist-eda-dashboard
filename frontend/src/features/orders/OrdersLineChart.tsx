@@ -13,7 +13,7 @@ interface Props {
 export default function OrdersLineChart({ data }: Props) {
   return (
     // Tailwind styling for the chart container
-    <ChartCard heightClass="h-72">
+    <ChartCard heightClass="h-72" title="Daily Orders">
       <Plot
         data={[
           {
@@ -25,10 +25,6 @@ export default function OrdersLineChart({ data }: Props) {
           },
         ]}
         layout={{
-          title: {
-            text: 'Daily Orders',
-            font: { color: '#6b7280' }, // Tailwind gray-500
-          },
           autosize: true, // Tells Plotly to fill the container
           margin: { t: 40, r: 20, l: 40, b: 40 },
           paper_bgcolor: 'transparent', // Let the Tailwind bg color show through

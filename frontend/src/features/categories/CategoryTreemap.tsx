@@ -15,7 +15,7 @@ export default function CategoryTreemap({ data }: Props) {
   const parents = Array(data.category.length).fill('');
 
   return (
-     <ChartCard>
+     <ChartCard title="Sales by Category">
       <Plot
         data={[
           {
@@ -33,10 +33,6 @@ export default function CategoryTreemap({ data }: Props) {
           },
         ]}
         layout={{
-          title: {
-            text: 'Sales by Category',
-            font: { color: '#6b7280' },
-          },
           autosize: true,
           margin: { t: 40, r: 0, l: 0, b: 0 },
           paper_bgcolor: 'transparent',

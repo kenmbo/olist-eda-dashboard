@@ -11,7 +11,7 @@ interface Props {
 
 export default function SellerShippingBoxPlot({ data }: Props) {
   return (
-     <ChartCard>
+     <ChartCard title="Delivery Time by Seller Order Volume">
       <Plot
         data={[
           {
@@ -23,10 +23,6 @@ export default function SellerShippingBoxPlot({ data }: Props) {
           },
         ]}
         layout={{
-          title: {
-            text: 'Delivery Time by Seller Order Volume',
-            font: { color: '#6b7280' },
-          },
           autosize: true,
           margin: { t: 40, r: 20, l: 40, b: 40 },
           paper_bgcolor: 'transparent',
