@@ -13,7 +13,7 @@ export default function OrderCostsHistograms({ data }: Props) {
   // Shared layout properties to keep the code DRY
   const sharedLayout = {
     autosize: true,
-    margin: { t: 40, r: 20, l: 40, b: 40 },
+    margin: { t: 10, r: 0, l: 35, b: 15 },
     paper_bgcolor: 'transparent',
     plot_bgcolor: 'transparent',
     yaxis: {

@@ -26,7 +26,7 @@ export default function ChartCard({ children, heightClass = 'h-96', title }: Pro
   // The base styling shared by both states
   const baseClasses = "bg-gray-900 rounded-lg shadow-md border border-gray-800 group flex flex-col transition-all duration-300";  
   // Sits inside the grid
-  const normalClasses = `relative w-full p-4 ${heightClass} ${baseClasses}`;
+  const normalClasses = `relative w-full p-2 ${heightClass} ${baseClasses}`;
   // Floats over the entire screen
   const expandedClasses = `fixed inset-4 z-50 p-6 ${baseClasses}`;
 

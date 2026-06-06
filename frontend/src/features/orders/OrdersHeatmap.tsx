@@ -25,7 +25,7 @@ export default function OrdersHeatmap({ data }: Props) {
         ]}
         layout={{
           autosize: true,
-          margin: { t: 40, r: 20, l: 40, b: 40 },
+          margin: { t: 5, r: 0, l: 40, b: 25 },
           paper_bgcolor: 'transparent',
           plot_bgcolor: 'transparent',
           xaxis: {

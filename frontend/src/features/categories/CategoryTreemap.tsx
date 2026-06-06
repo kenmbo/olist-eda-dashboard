@@ -34,7 +34,7 @@ export default function CategoryTreemap({ data }: Props) {
         ]}
         layout={{
           autosize: true,
-          margin: { t: 40, r: 0, l: 0, b: 0 },
+          margin: { t: 0, r: 0, l: 0, b: 0 },
           paper_bgcolor: 'transparent',
           plot_bgcolor: 'transparent',
         }}

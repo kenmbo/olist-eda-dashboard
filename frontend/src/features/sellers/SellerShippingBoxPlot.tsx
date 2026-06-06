@@ -24,7 +24,7 @@ export default function SellerShippingBoxPlot({ data }: Props) {
         ]}
         layout={{
           autosize: true,
-          margin: { t: 40, r: 20, l: 40, b: 40 },
+          margin: { t: 0, r: 5, l: 15, b: 15 },
           paper_bgcolor: 'transparent',
           plot_bgcolor: 'transparent',
           xaxis: {

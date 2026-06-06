@@ -26,7 +26,7 @@ export default function OrdersLineChart({ data }: Props) {
         ]}
         layout={{
           autosize: true, // Tells Plotly to fill the container
-          margin: { t: 40, r: 20, l: 40, b: 40 },
+          margin: { t: 0, r: 0, l: 30, b: 15 },
           paper_bgcolor: 'transparent', // Let the Tailwind bg color show through
           plot_bgcolor: 'transparent',
           coloraxis: {colorbar:'white'},

@@ -32,7 +32,7 @@ return (
         }]}
         layout={{
           autosize: true,
-          margin: { t: 40, r: 0, l: 0, b: 0 },
+          margin: { t: 10, r: 0, l: 0, b: 0 },
           paper_bgcolor: 'transparent',
           plot_bgcolor: 'transparent',
           map: {
