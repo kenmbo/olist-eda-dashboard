@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import type { CategoryMonthlySalesResponse } from '../../types/api';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
@@ -9,5 +10,9 @@ const fetchCategoryMonthlySales = async (): Promise<CategoryMonthlySalesResponse
 };
 
 export const useCategoryMonthlySales = () => {
-    return fetchCategoryMonthlySales;
+  return useQuery({
+    queryKey: ['categoryMonthlySales'],
+    queryFn: fetchCategoryMonthlySales,
+    staleTime: 1000 * 60 * 5,
+  });
 };
