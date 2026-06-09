@@ -22,7 +22,36 @@ export default function CategoryMonthlySalesChart({ data }: Props) {
 
   return (
     <ChartCard heightClass="h-80" title="Monthly Sales for Selected Categories">
-      <Plot data={traces}/>
+      <Plot
+        data={traces}
+        layout={{
+          autosize: true,
+          margin: { t: 10, r: 20, l: 40, b: 40 }, // Top margin reduced to 10
+          paper_bgcolor: 'transparent',
+          plot_bgcolor: 'transparent',
+          xaxis: { 
+            gridcolor: '#374151',
+            tickfont: { color: '#9ca3af' },
+            tickangle: -45, // Angled text to prevent month labels from overlapping
+          },
+          yaxis: { 
+            title: 'Revenue (BRL)',
+            gridcolor: '#374151',
+            tickfont: { color: '#9ca3af' }
+          },
+          legend: {
+            font: { color: '#9ca3af' },
+            orientation: 'h', // Horizontal legend looks better on wide charts
+            yanchor: 'bottom',
+            y: 1.02,
+            xanchor: 'right',
+            x: 1
+          }
+        }}
+        useResizeHandler={true}
+        style={{ width: '100%', height: '100%' }}
+        config={{ displayModeBar: false }}
+      />
     </ChartCard>
   );
 }
