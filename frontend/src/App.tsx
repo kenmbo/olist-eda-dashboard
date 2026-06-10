@@ -7,6 +7,7 @@ import SellerShippingContainer from './features/sellers/SellerShippingContainer'
 import OrdersHeatmapContainer from './features/orders/OrdersHeatmapContainer';
 import OrderCostsContainer from './features/orders/OrderCostsContainer';
 import CustomerMapContainer from './features/customers/CustomerMapContainer';
+import CategoryMonthlySalesContainer from './features/categories/CategoryMonthlySalesContainer';
 
 function App() {
   // State to track which tab is currently selected
@@ -59,10 +60,18 @@ function App() {
 
 	{/* =======CATEGORIES======= */}
 	{activeTab === 'categories' && (
-             <div className="col-span-1 lg:col-span-12">
-		<CategoryContainer />
-	     </div>
-        )}
+            <>
+              {/* Treemap spans full width */}
+              <div className="col-span-1 lg:col-span-12">
+                <CategoryContainer /> 
+              </div>
+              
+              {/* New Monthly Sales Line Chart spans full width */}
+              <div className="col-span-1 lg:col-span-12">
+                <CategoryMonthlySalesContainer />
+              </div>
+            </>
+          )}
 
 	{/* =======DELIVERY======= */}
 	{activeTab === 'delivery' && (
