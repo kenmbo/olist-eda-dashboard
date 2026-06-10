@@ -36,22 +36,18 @@ function App() {
 	{/* =======ORDERS======= */}
 	{activeTab === 'orders' && (
             <>
-              {/* Top Row: Line Chart gets 8 columns (wider), Map gets 4 columns (narrower) */}
               <div className="col-span-1 lg:col-span-6">
                 <OrdersContainer />
               </div>
-              
+
               <div className="col-span-1 lg:col-span-6">
                 <OrdersHeatmapContainer />
               </div>
               
-              {/* Middle Row: Heatmap spans all 12 columns so the timeline is readable */}
               <div className="col-span-1 lg:col-span-12">
                 <CustomerMapContainer />
               </div>
               
-              {/* Bottom Row: The OrderCostsContainer handles its own 50/50 split internally, 
-                  so we give its parent wrapper the full 12 columns */}
               <div className="col-span-1 lg:col-span-12">
                 <OrderCostsContainer />
               </div>
