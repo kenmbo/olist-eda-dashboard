@@ -1,5 +1,8 @@
 from fastapi import FastAPI
+from fastapi import Response
 from fastapi.middleware.cors import CORSMiddleware
+import pandas as pd
+from src import queries
 from src import database
 from src import utils
 
@@ -189,3 +192,29 @@ def get_clv_map_data():
     df = database.get_avg_clv_per_zip_prefix(conn)
     conn.close()
     return df.to_dict(orient="list")
+
+@app.get("/api/categories/monthly-sales")
+def get_monthly_category_sales():
+    """
+    Retrieves monthly sales data for the top 5 highest-grossing categories.
+    Formatted as a split JSON to generate parallel time-series traces in Plotly.
+    """
+    try:
+        conn = database.get_connection()
+        df = pd.read_sql_query(queries.monthly_category_sales, conn)
+        top_categories = df.groupby('category')['total_sales'].sum().nlargest(5).index
+        filtered_df = df[df['category'].isin(top_categories)]
+        # Pivot table: Months become the index, Categories become the columns
+        pivot_df = filtered_df.pivot(index='order_month', columns='category', values='total_sales')
+        pivot_df = pivot_df.fillna(0)
+        json_data = pivot_df.to_json(orient="split")
+        return Response(content=json_data, media_type="application/json")
+        
+    except Exception as e:
+        print(f"Error fetching monthly category sales: {e}")
+        return {"error": str(e)}
+
+    finally:
+        # This will ALWAYS run, safely releasing the database lock
+        if conn:
+            conn.close()
