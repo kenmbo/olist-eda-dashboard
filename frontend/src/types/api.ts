@@ -39,3 +39,5 @@ export interface CategoryMonthlySalesResponse {
   columns: string[];  // The category names
   data: number[][];   // 2D array: rows are months, columns are sales for that category
 }
+
+export type CategoryWeightResponse = Record<string, number[]>;
