@@ -100,3 +100,5 @@ npm run dev
 
 # Open localhost URL in the web browser of your choice (e.g. Firefox, Chrome, etc.)
 ```
+
+![Picture of the dashboard in a web browser. This showcases the frontend of this project. The dashboard features a daily orders line graph, a heatmap of orders by day and hour, and a customer density heatmap.](docs/screenshot-frontend.png)
