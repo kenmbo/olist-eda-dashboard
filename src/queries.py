@@ -427,3 +427,14 @@ JOIN products p ON oi.product_id = p.product_id
 WHERE p.product_category_name IS NOT NULL
   AND p.product_weight_g IS NOT NULL
 """
+
+daily_delivery_time = """
+SELECT
+    date(order_purchase_timestamp) AS order_date,
+    AVG(julianday(order_delivered_customer_date) - julianday(order_purchase_timestamp)) AS avg_delivery_days
+FROM orders
+WHERE order_status = 'delivered'
+  AND order_delivered_customer_date IS NOT NULL
+GROUP BY order_date
+ORDER BY order_date ASC
+"""
