@@ -26,6 +26,14 @@ Currently working on the `README.md`.
 * [FastAPI](https://github.com/fastapi/fastapi) - API engine
 * [Uvicorn](https://uvicorn.dev/) (OPTIONAL) - Easy web server to handle the API endpoints
 
+## Frontend
+The frontend uses the `React` framework with `Vite` tooling.
+* npm - Package mangement
+* React - Common TypeScript framework for frontend development.
+* Vite - Dev Tooling (dev server, hot module replacement)
+* tailwindCSS - CSS web-styling framework
+* plotly.js-dist-min - Plotly is a data visualization library (makes graphs). `dist-min` is used pragmatically for scaling purposes.
+* lucide - Text icons
 
 # Installtion
 Obtain the the O-list dataset through Kaggle:
@@ -94,7 +102,7 @@ cd olist-eda-dashboard/
 cd frontend/
 
 # Install depndencies
-npm install
+npm install react plotly.js-dist-min lucide-react @tailwindcss/vite@next
 
 # Run server
 npm run dev
