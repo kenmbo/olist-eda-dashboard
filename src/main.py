@@ -113,17 +113,25 @@ def get_order_costs():
 @app.get("/api/categories/weights")
 def get_category_weights():
     """Returns product weights by category, with outliers removed for box plots."""
-    conn = database.get_connection()
-    df = database.get_ordered_categories(conn)
-    
-    # Optional: If median sorting array is needed on the frontend, fetch it here
-    # median_df = database.get_categories_by_median(conn)
-    
-    conn.close()
-    
-    # Clean the data using your standard deviation logic
-    clean_df = utils.remove_outliers_by_category(df, 'weight')
-    return clean_df.to_dict(orient="list")
+    conn = None 
+    try:
+        conn = database.get_connection()
+        df = pd.read_sql_query(queries.product_weights, conn)
+        top_categories = df['category'].value_counts().nlargest(5).index
+
+        result = {}
+        for cat in top_categories:
+            result[cat] = df[df['category'] == cat]['weight'].tolist()
+
+        return result
+        
+    except Exception as e:
+        print(f"Error fetching category weights: {e}")
+        return {"error": str(e)}
+        
+    finally:
+        if conn:
+            conn.close()
 
 @app.get("/api/sales/monthly")
 def get_monthly_sales():
