@@ -8,6 +8,7 @@ import OrdersHeatmapContainer from './features/orders/OrdersHeatmapContainer';
 import OrderCostsContainer from './features/orders/OrderCostsContainer';
 import CustomerMapContainer from './features/customers/CustomerMapContainer';
 import CategoryMonthlySalesContainer from './features/categories/CategoryMonthlySalesContainer';
+import CategoryWeightsContainer from './features/categories/CategoryWeight';
 
 function App() {
   // State to track which tab is currently selected
@@ -55,20 +56,23 @@ function App() {
 	)}
 
 	{/* =======CATEGORIES======= */}
+
 	{activeTab === 'categories' && (
             <>
-              {/* Treemap spans full width */}
               <div className="col-span-1 lg:col-span-12">
-                <CategoryContainer /> 
+                <CategoryContainer />
               </div>
-              
-              {/* New Monthly Sales Line Chart spans full width */}
+
               <div className="col-span-1 lg:col-span-12">
                 <CategoryMonthlySalesContainer />
               </div>
+
+              {/* The new Boxplot */}
+              <div className="col-span-1 lg:col-span-12">
+                <CategoryWeightsContainer />
+              </div>
             </>
           )}
-
 	{/* =======DELIVERY======= */}
 	{activeTab === 'delivery' && (
              <div className="col-span-1 lg:col-span-12">
