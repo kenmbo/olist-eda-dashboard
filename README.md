@@ -22,6 +22,7 @@ Currently working on the `README.md`.
 * plotly - data charts, graphs, etc.
 * folium - Rendering geospatial map for CLV and logistics.
 * dash - building and deploying web dashboard
+* stastsmodels - LOWESS trendline for line graphs
 * [FastAPI](https://github.com/fastapi/fastapi) - API engine
 * [Uvicorn](https://uvicorn.dev/) (OPTIONAL) - Easy web server to handle the API endpoints
 
@@ -78,7 +79,7 @@ source .venv/bin/activate
 
 # Install dependencies 
 # (Pandas for data processing, FastAPI for API state management, Uvicorn for fast web server setup.
-pip install pandas fastapi uvicorn
+pip install pandas statsmodels fastapi uvicorn
 
 # Run API server
 uvicorn src.main:app --reload

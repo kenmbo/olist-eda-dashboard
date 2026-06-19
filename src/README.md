@@ -9,7 +9,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 
 # Install depndencies
-pip install pandas fastapi uvicorn
+pip install pandas statsmodels fastapi uvicorn
 
 # Run API server
 uvicorn src.main:app --reload
