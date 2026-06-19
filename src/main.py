@@ -121,7 +121,9 @@ def get_category_weights():
 
         result = {}
         for cat in top_categories:
-            result[cat] = df[df['category'] == cat]['weight'].tolist()
+             cat_df = df[df['category'] == cat]
+             filtered_cat_df = utils.remove_outliers_by_category(cat_df, 'weight', 0.8)
+             result[cat] = filtered_cat_df['weight'].tolist()
 
         return result
         
