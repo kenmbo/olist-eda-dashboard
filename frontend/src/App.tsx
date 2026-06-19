@@ -8,7 +8,7 @@ import OrdersHeatmapContainer from './features/orders/OrdersHeatmapContainer';
 import OrderCostsContainer from './features/orders/OrderCostsContainer';
 import CustomerMapContainer from './features/customers/CustomerMapContainer';
 import CategoryMonthlySalesContainer from './features/categories/CategoryMonthlySalesContainer';
-import CategoryWeightsContainer from './features/categories/CategoryWeight';
+import CategoryWeightsContainer from './features/categories/CategoryWeightsContainer';
 
 function App() {
   // State to track which tab is currently selected
