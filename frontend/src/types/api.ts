@@ -41,3 +41,10 @@ export interface CategoryMonthlySalesResponse {
 }
 
 export type CategoryWeightResponse = Record<string, number[]>;
+
+
+export interface DeliveryTrendResponse {
+  dates: string[];
+  actual_days: number[];
+  trend_days: number[];
+}
