@@ -1,7 +1,9 @@
 from fastapi import FastAPI
 from fastapi import Response
 from fastapi.middleware.cors import CORSMiddleware
+import numpy as np
 import pandas as pd
+from statsmodels.nonparametric.smoothers_lowess import lowess
 from src import queries
 from src import database
 from src import utils
@@ -251,3 +253,40 @@ def get_category_weights():
 
     finally:
     	conn.close()
+
+
+@app.get("/api/delivery/trend")
+def get_delivery_trend():
+    """
+    Retrieves the daily average delivery time and calculates a LOWESS trendline.
+    """
+    conn = None
+    try:
+        conn = database.get_connection()
+        df = pd.read_sql_query(queries.daily_delivery_time, conn)
+
+        # Drop any weird outliers or nulls to keep the math clean
+        df = df.dropna()
+
+        # Calculate the LOWESS trendline
+        # frac=0.1 means it uses 10% of the data points for each local regression (smooths it nicely)
+        # We use np.arange for the X-axis because LOWESS requires numeric inputs, not datetime objects
+        trend_data = lowess(df['avg_delivery_days'], np.arange(len(df)), frac=0.1)
+
+        # Extract the smoothed Y-values (the second column of the lowess output array)
+        df['trendline'] = trend_data[:, 1]
+
+        # Package it up as a dictionary of arrays for Plotly
+        return {
+            "dates": df['order_date'].tolist(),
+            "actual_days": df['avg_delivery_days'].tolist(),
+            "trend_days": df['trendline'].tolist()
+        }
+
+    except Exception as e:
+        print(f"Error fetching delivery trend: {e}")
+        return {"error": str(e)}
+
+    finally:
+        if conn:
+            conn.close()
