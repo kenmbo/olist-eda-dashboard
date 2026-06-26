@@ -9,7 +9,7 @@ import OrderCostsContainer from './features/orders/OrderCostsContainer';
 import CustomerMapContainer from './features/customers/CustomerMapContainer';
 import CategoryMonthlySalesContainer from './features/categories/CategoryMonthlySalesContainer';
 import CategoryWeightsContainer from './features/categories/CategoryWeightsContainer';
-import DeliveryTrendContainer from '.features/delivery/DeliveryTrendContainer';
+import DeliveryTrendContainer from './features/delivery/DeliveryTrendContainer';
 
 function App() {
   // State to track which tab is currently selected
