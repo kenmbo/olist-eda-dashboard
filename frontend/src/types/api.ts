@@ -48,3 +48,10 @@ export interface DeliveryTrendResponse {
   actual_days: number[];
   trend_days: number[];
 }
+
+export interface DeliveryStagesResponse {
+  cities: string[];
+  approval_days: number[];
+  carrier_days: number[];
+  transit_days: number[];
+}
