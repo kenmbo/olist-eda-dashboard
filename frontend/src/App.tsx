@@ -10,6 +10,7 @@ import CustomerMapContainer from './features/customers/CustomerMapContainer';
 import CategoryMonthlySalesContainer from './features/categories/CategoryMonthlySalesContainer';
 import CategoryWeightsContainer from './features/categories/CategoryWeightsContainer';
 import DeliveryTrendContainer from './features/delivery/DeliveryTrendContainer';
+import DeliveryStagesContainer from './features/delivery/DeliveryStagesContainer';
 
 function App() {
   // State to track which tab is currently selected
@@ -82,7 +83,11 @@ function App() {
 	     <div className="col-span-1 lg:col-span-12">
 		<DeliveryTrendContainer />
 	     </div>
+       	     <div className="col-span-1 lg:col-span-12">
+		<DeliveryStagesContainer />
+	     </div>
        
+
         )}
 
        {/* =======SELLERS======= */}
