@@ -290,3 +290,29 @@ def get_delivery_trend():
     finally:
         if conn:
             conn.close()
+
+@app.get("/api/delivery/stages")
+def get_delivery_stages():
+    """
+    Retrieves the average days spent in each delivery stage for the top 10 cities.
+    """
+    conn = None
+    try:
+        conn = database.get_connection()
+        df = pd.read_sql_query(queries.city_delivery_stages, conn)
+
+        return {
+            # Title-case the city names so 'sao paulo' becomes 'Sao Paulo'
+            "cities": df['city'].str.title().tolist(),
+            "approval_days": df['approval_days'].tolist(),
+            "carrier_days": df['carrier_days'].tolist(),
+            "transit_days": df['transit_days'].tolist(),
+        }
+
+    except Exception as e:
+        print(f"Error fetching delivery stages: {e}")
+        return {"error": str(e)}
+
+    finally:
+        if conn:
+            conn.close()
