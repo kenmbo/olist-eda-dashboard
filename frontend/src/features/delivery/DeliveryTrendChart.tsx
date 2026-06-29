@@ -1,3 +1,4 @@
+import Plotly from 'plotly.js-dist-min';
 import createPlotlyComponent from 'react-plotly.js/factory';
 import type { DeliveryTrendResponse } from '../../types/api';
 import ChartCard from '../../components/common/ChartCard';
@@ -9,28 +10,48 @@ interface Props {
 }
 
 export default function DeliveryTrendChart({ data }: Props) {
+
+  // Calculate 25% and 75% markers based on the dataset length
+  const totalPoints = data.dates.length;
+  const startIndex = Math.floor(totalPoints * 0.25);
+  const endIndex = Math.floor(totalPoints * 0.75);
+
   return (
     <ChartCard heightClass="h-80" title="Average Delivery Time with LOWESS Trend">
       <Plot
         data={[
           {
-            // The raw, noisy daily averages
             x: data.dates,
             y: data.actual_days,
             type: 'scatter',
             mode: 'lines',
             name: 'Daily Average',
-            line: { color: '#4b5563', width: 1 }, // Tailwind gray-600, thin line
-            opacity: 0.5,
+            line: { color: 'white', width: 1 }, // Tailwind gray-600, thin line
+            opacity: 1,
+	    fill: 'tozeroy',
+  fillgradient: {
+    type: 'vertical',
+    colorscale: [
+      //[0, 'rgba(255, 165, 10, 0)'], // Starting color with 80% opacity
+      [0, 'rgba(0, 165, 10, 0)'], // Starting color with 80% opacity
+      //[1, 'rgba(255, 165, 10, 0.5)']    // Fades to fully transparent at the other end
+      [1, 'rgba(0, 165, 10, 0.5)']    // Fades to fully transparent at the other end
+    ],
+    // 'start' and 'stop' define the axis range the gradient spans
+    // Note: If zooming/panning, you may need to update these values dynamically
+    start: 0, 
+    stop: 17  
+  },
           },
           {
-            // The smooth LOWESS trendline
+            // LOWESS trendline
             x: data.dates,
             y: data.trend_days,
             type: 'scatter',
             mode: 'lines',
             name: 'Trend',
-            line: { color: '#3b82f6', width: 3 }, // Tailwind blue-500, thick line
+            line: { color: '#ddd', width: 3 },
+	    opacity: 0.4,
           }
         ]}
         layout={{
@@ -38,15 +59,18 @@ export default function DeliveryTrendChart({ data }: Props) {
           margin: { t: 10, r: 20, l: 40, b: 40 },
           paper_bgcolor: 'transparent',
           plot_bgcolor: 'transparent',
-          xaxis: {
+          xaxis: { 
             gridcolor: '#374151',
-            tickfont: { color: '#9ca3af' }
+            tickfont: { color: '#9ca3af' },
+            rangemode: 'normal',
+            range: [data.dates[startIndex], data.dates[endIndex]],
           },
-          yaxis: {
+          yaxis: { 
             title: 'Days to Deliver',
             gridcolor: '#374151',
             tickfont: { color: '#9ca3af' },
-            rangemode: 'tozero', // Forces the Y-axis to start at 0
+            rangemode: 'tozero',
+            range: [0, 25],
           },
           legend: {
             font: { color: '#9ca3af' },
