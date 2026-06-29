@@ -74,9 +74,11 @@ function App() {
                 <CategoryWeightsContainer />
               </div>
             </>
-          )}
+        )}
+
 	{/* =======DELIVERY======= */}
 	{activeTab === 'delivery' && (
+	  <>
              <div className="col-span-1 lg:col-span-12">
 		<SellerShippingContainer />
 	     </div>
@@ -86,8 +88,7 @@ function App() {
        	     <div className="col-span-1 lg:col-span-12">
 		<DeliveryStagesContainer />
 	     </div>
-       
-
+          </>
         )}
 
        {/* =======SELLERS======= */}
