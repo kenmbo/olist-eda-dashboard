@@ -19,21 +19,21 @@ export default function DeliveryStagesChart({ data }: Props) {
             y: data.approval_days,
             type: 'bar',
             name: 'Approval Time',
-            marker: { color: '#64748b' }, // Tailwind slate-500
+            marker: { color: '#eab308' },
           },
           {
             x: data.cities,
             y: data.carrier_days,
             type: 'bar',
             name: 'Carrier Prep',
-            marker: { color: '#3b82f6' }, // Tailwind blue-500
+            marker: { color: '#f97316' }, // Tailwind blue-500
           },
           {
             x: data.cities,
             y: data.transit_days,
             type: 'bar',
             name: 'Transit Time',
-            marker: { color: '#818cf8' }, // Tailwind indigo-400
+            marker: { color: '#e11d48' }, // Tailwind indigo-400
           }
         ]}
         layout={{
