@@ -316,3 +316,29 @@ def get_delivery_stages():
     finally:
         if conn:
             conn.close()
+
+@app.get("/api/leads/origin")
+def get_leads_by_origin():
+    """
+    Retrieves the count of marketing qualified leads (MQLs) grouped by their acquisition origin.
+    """
+    conn = None
+    try:
+        conn = database.get_connection()
+        df = pd.read_sql_query(queries.leads_by_origin, conn)
+
+        # Clean up the origin names for the frontend (e.g. 'organic_search' -> 'Organic Search')
+        df['origin'] = df['origin'].str.replace('_', ' ').str.title()
+
+        return {
+            "origins": df['origin'].tolist(),
+            "leads": df['total_leads'].tolist()
+        }
+
+    except Exception as e:
+        print(f"Error fetching leads by origin: {e}")
+        return {"error": str(e)}
+
+    finally:
+        if conn:
+            conn.close()
