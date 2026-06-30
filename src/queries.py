@@ -467,3 +467,14 @@ WHERE o.order_status = 'delivered'
 GROUP BY c.customer_city
 ORDER BY cv.order_count DESC
 """
+
+leads_by_origin = """
+SELECT
+    origin,
+    COUNT(mql_id) AS total_leads
+FROM marketing_qualified_leads
+WHERE origin IS NOT NULL AND origin != ''
+  AND origin != 'other'
+GROUP BY origin
+ORDER BY total_leads ASC -- Sorted ascending so Plotly puts the largest bar at the top
+"""
