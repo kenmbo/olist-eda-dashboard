@@ -55,3 +55,8 @@ export interface DeliveryStagesResponse {
   carrier_days: number[];
   transit_days: number[];
 }
+
+export interface LeadOriginResponse {
+  origins: string[];
+  leads: number[];
+}
