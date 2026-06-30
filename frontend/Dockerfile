@@ -22,7 +22,7 @@ RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Copy a custom Nginx config (Required if using React Router for multiple pages)
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80 (the default HTTP port)
 EXPOSE 80
