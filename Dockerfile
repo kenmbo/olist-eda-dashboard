@@ -16,7 +16,7 @@ RUN mkdir -p data
 
 # Curl from my cloud storage
 RUN apt-get update && apt-get install -y curl && \
-    curl -o data/olist.sqlite "https://storage.googleapis.com/YOUR_BUCKET_NAME/olist.sqlite" && \
+    curl -o data/olist.sqlite "https://storage.googleapis.com/olist-dashboard-assets-123/olist.sqlite" && \
     apt-get clean
 
 # Expose the FastAPI port
