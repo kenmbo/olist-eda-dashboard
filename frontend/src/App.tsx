@@ -11,6 +11,7 @@ import CategoryMonthlySalesContainer from './features/categories/CategoryMonthly
 import CategoryWeightsContainer from './features/categories/CategoryWeightsContainer';
 import DeliveryTrendContainer from './features/delivery/DeliveryTrendContainer';
 import DeliveryStagesContainer from './features/delivery/DeliveryStagesContainer';
+import LeadOriginsContainer from './features/leads/LeadOriginsContainer';
 
 function App() {
   // State to track which tab is currently selected
@@ -93,9 +94,11 @@ function App() {
 
        {/* =======SELLERS======= */}
        {activeTab === 'sellers' && 
-             <div className="col-span-12 text-gray-500">
-		Sellers & Leads charts coming soon...
-	     </div>
+            <>
+              <div className="col-span-1 lg:col-span-12">
+                <LeadOriginsContainer />
+              </div>
+            </>
        }
 
        {/* =======PREDICTIONS======= */}
