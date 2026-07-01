@@ -472,7 +472,7 @@ leads_by_origin = """
 SELECT
     origin,
     COUNT(mql_id) AS total_leads
-FROM marketing_qualified_leads
+FROM leads_qualified
 WHERE origin IS NOT NULL AND origin != ''
   AND origin != 'other'
 GROUP BY origin
