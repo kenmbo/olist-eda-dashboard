@@ -97,6 +97,10 @@ uvicorn src.main:app --reload
 ![Web server (Uvicorn) displaying API request statuses to the terminal emulator. The 200 OK status codes means the requests are successfully processed.](docs/screenshot-api-server.png)
 
 ## Running the frontend server
+See the sibling repository: [https://github.com/kenmbo/olist-eda-dashboard-frontend](https://github.com/kenmbo/olist-eda-dashboard-frontend)
+
+### Setup
+
 ```bash
 cd olist-eda-dashboard/
 cd frontend/
@@ -108,6 +112,7 @@ npm install react plotly.js-dist-min lucide-react @tailwindcss/vite@next
 npm run dev
 
 # Open localhost URL in the web browser of your choice (e.g. Firefox, Chrome, etc.)
+# Default url: http://localhost:5173/
 ```
 
 ![Picture of the dashboard in a web browser. This showcases the frontend of this project. The dashboard features a daily orders line graph, a heatmap of orders by day and hour, and a customer density heatmap.](docs/screenshot-frontend.png)
