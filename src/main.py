@@ -77,12 +77,33 @@ def get_seller_performance():
 
 @app.get("/api/leads/conversion")
 def get_lead_conversions():
-    """Returns qualified vs closed leads and conversion rates by origin."""
-    conn = database.get_connection()
-    df = database.get_lead_conversion(conn)
-    conn.close()
-    
-    return df.to_dict(orient="list")
+    """
+    Retrieves qualified vs closed leads and conversion rates by origin.
+    Formatted for a dual-axis Plotly chart.
+    """
+    conn = None
+    try:
+        conn = database.get_connection()
+        # Execute the raw SQL from queries.py
+        df = pd.read_sql_query(queries.lead_conversion, conn)
+
+        # Clean the origin names for the UI
+        df['origin'] = df['origin'].str.replace('_', ' ').str.title()
+
+        return {
+            "origins": df['origin'].tolist(),
+            "qualified_leads": df['qualified_leads'].tolist(),
+            "closed_leads": df['closed_leads'].tolist(),
+            "conversion_rate": df['conversion_rate'].tolist()
+        }
+
+    except Exception as e:
+        print(f"Error fetching lead conversions: {e}")
+        return {"error": str(e)}
+        
+    finally:
+        if conn:
+            conn.close()
 
 @app.get("/api/sellers/distribution")
 def get_seller_distribution():
