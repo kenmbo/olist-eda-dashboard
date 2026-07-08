@@ -25,6 +25,7 @@ Currently working on the `README.md`.
 * stastsmodels - LOWESS trendline for line graphs
 * [FastAPI](https://github.com/fastapi/fastapi) - API engine
 * [Uvicorn](https://uvicorn.dev/) (OPTIONAL) - Easy web server to handle the API endpoints
+* dotenv - load environment variables from an `.env` file
 
 ## Frontend
 The frontend uses the `React` framework with `Vite` tooling.
