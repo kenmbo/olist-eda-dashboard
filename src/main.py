@@ -1,3 +1,4 @@
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi import Response
 from fastapi.middleware.cors import CORSMiddleware
@@ -8,17 +9,17 @@ from src import queries
 from src import database
 from src import utils
 
+# Load .env file
+load_dotenv()
+
 app = FastAPI(
     title="Olist Dashboard API",
     description="Backend API serving data for the Olist E-commerce Dashboard"
 )
 
-origins = [
-    "http://localhost:3000",
-    "http://localhost:5173",  # Default Vite port
-    "http://localhost:5174",  # Vite port + 1 (5173+1=5174), for debugging
-    "https://olist-eda-dashboard-frontend-689852289803.us-central1.run.app"
-]
+origins_str = os.getenv("CORS_ORIGINS", "")
+
+origins = [origin.strip() for origin in origins_str.split(",") if origin.strip()]
 
 app.add_middleware(
     CORSMiddleware,
