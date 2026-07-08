@@ -87,7 +87,7 @@ source .venv/bin/activate
 
 # Install dependencies 
 # (Pandas for data processing, FastAPI for API state management, Uvicorn for fast web server setup.
-pip install pandas statsmodels fastapi uvicorn
+pip install pandas statsmodels fastapi uvicorn dotenv
 
 # Run API server
 uvicorn src.main:app --reload
