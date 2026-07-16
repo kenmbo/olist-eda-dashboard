@@ -109,32 +109,12 @@ def get_lead_conversions():
 
 @app.get("/api/sellers/distribution")
 def get_seller_distribution():
-    """
-    Retrieves the count of sellers grouped by their total order volume buckets.
-    """
-    conn = None
-    try:
-        conn = database.get_connection()
-        df = pd.read_sql_query(queries.sellers_per_bucket, conn)
-
-        # Explicitly define the correct ascending order for the buckets
-        bucket_order = ['1-9 orders', '10-99 orders', '100-999 orders', '1000+ orders']
-        df['bucket'] = pd.Categorical(df['bucket'], categories=bucket_order, ordered=True)
-
-        df = df.sort_values('bucket')
-
-        return {
-            "buckets": df['bucket'].tolist(),
-            "seller_count": df['seller_count'].tolist()
-        }
-
-    except Exception as e:
-        print(f"Error fetching seller distribution: {e}")
-        return {"error": str(e)}
-
-    finally:
-        if conn:
-            conn.close()
+    """Returns the count of sellers grouped by their total order volume buckets."""
+    conn = database.get_connection()
+    df = database.get_sellers_per_bucket(conn)
+    conn.close()
+    
+    return df.to_dict(orient="list")
 
 @app.get("/api/sellers/shipping-times")
 def get_seller_shipping():
@@ -227,11 +207,29 @@ def get_daily_shipping_average():
 
 @app.get("/api/reviews/distribution")
 def get_review_distribution():
-    """Returns the count of each review score."""
-    conn = database.get_connection()
-    df = database.get_review_score_count(conn)
-    conn.close()
-    return df.to_dict(orient="list")
+    """
+    Retrieves the total count of reviews grouped by their 1-5 star score.
+    """
+    conn = None
+    try:
+        conn = database.get_connection()
+        df = pd.read_sql_query(queries.review_score_distribution, conn)
+        
+        # Format the X-axis labels to look like "1 ★", "2 ★", etc.
+        df['review_score_label'] = df['review_score'].astype(str) + " ★"
+
+        return {
+            "scores": df['review_score_label'].tolist(),
+            "counts": df['total_reviews'].tolist()
+        }
+
+    except Exception as e:
+        print(f"Error fetching review distribution: {e}")
+        return {"error": str(e)}
+
+    finally:
+        if conn:
+            conn.close()
 
 @app.get("/api/customers/rfm")
 def get_rfm_segments():
