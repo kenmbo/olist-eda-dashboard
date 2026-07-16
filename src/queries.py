@@ -478,3 +478,13 @@ WHERE origin IS NOT NULL AND origin != ''
 GROUP BY origin
 ORDER BY total_leads ASC -- Sorted ascending so Plotly puts the largest bar at the top
 """
+
+review_score_distribution = """
+SELECT
+    review_score,
+    COUNT(review_id) AS total_reviews
+FROM order_reviews
+WHERE review_score IS NOT NULL
+GROUP BY review_score
+ORDER BY review_score ASC
+"""
