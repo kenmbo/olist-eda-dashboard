@@ -384,3 +384,33 @@ def get_leads_by_origin():
     finally:
         if conn:
             conn.close()
+
+@app.get("/api/sellers/review-sales")
+def get_review_sales_scatter():
+    """
+    Retrieves total sales and average review scores per seller for clustering scatter plot.
+    """
+    conn = None
+    try:
+        conn = database.get_connection()
+        df = pd.read_sql_query(queries.seller_review_vs_sales, conn)
+
+        # Round the average score to 2 decimal places for cleaner tooltips
+        df['avg_score'] = df['avg_score'].round(2)
+        # Round sales to 2 decimal places
+        df['total_sales'] = df['total_sales'].round(2)
+
+        return {
+            "seller_ids": df['seller_id'].tolist(),
+            "total_sales": df['total_sales'].tolist(),
+            "avg_scores": df['avg_score'].tolist(),
+            "order_counts": df['order_count'].tolist()
+        }
+
+    except Exception as e:
+        print(f"Error fetching review vs sales data: {e}")
+        return {"error": str(e)}
+
+    finally:
+        if conn:
+            conn.close()
