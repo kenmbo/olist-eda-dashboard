@@ -500,3 +500,14 @@ JOIN order_reviews r ON oi.order_id = r.order_id
 GROUP BY oi.seller_id
 HAVING order_count > 5
 """
+
+daily_sales_trend = """
+SELECT
+    DATE(o.order_purchase_timestamp) AS order_date,
+    SUM(op.payment_value) AS total_sales
+FROM orders o
+JOIN order_payments op ON o.order_id = op.order_id
+WHERE o.order_status = 'delivered'
+GROUP BY order_date
+ORDER BY order_date ASC
+"""
