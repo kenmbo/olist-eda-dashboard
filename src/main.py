@@ -414,3 +414,40 @@ def get_review_sales_scatter():
     finally:
         if conn:
             conn.close()
+
+@app.get("/api/predictions/regression-trend")
+def get_regression_trend():
+    """
+    Retrieves daily sales and calculates a linear regression trendline.
+    """
+    conn = None
+    try:
+        conn = database.get_connection()
+        df = pd.read_sql_query(queries.daily_sales_trend, conn)
+        
+        # Drop any null dates that might have slipped through
+        df = df.dropna(subset=['order_date', 'total_sales'])
+        
+        # Calculate the linear regression line (1st degree polynomial)
+        # We use a simple numeric sequence (0 to N) for the X-axis in the math
+        x_numeric = np.arange(len(df))
+        z = np.polyfit(x_numeric, df['total_sales'], 1)
+        p = np.poly1d(z)
+        
+        # Generate the Y values for the regression line
+        df['regression_line'] = p(x_numeric).round(2)
+        df['total_sales'] = df['total_sales'].round(2)
+
+        return {
+            "dates": df['order_date'].tolist(),
+            "actual_sales": df['total_sales'].tolist(),
+            "regression_trend": df['regression_line'].tolist()
+        }
+
+    except Exception as e:
+        print(f"Error fetching regression trend: {e}")
+        return {"error": str(e)}
+
+    finally:
+        if conn:
+            conn.close()
