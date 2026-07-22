@@ -272,31 +272,6 @@ def get_monthly_category_sales():
         if conn:
             conn.close()
 
-
-@app.get("/api/categories/weights")
-def get_category_weights():
-    """
-    Retrieves the distribution of product weights (in grams)
-    for the top 5 categories by order volume.
-    """
-    try:
-        conn = database.get_connection()
-        df = pd.read_sql_query(queries.product_weights, conn)
-        top_categories = df['category'].value_counts().nlargest(5).index
-        result = {}
-        for cat in top_categories:
-            result[cat] = df[df['category'] == cat]['weight'].tolist()
-
-        return result
-
-    except Exception as e:
-        print(f"Error fetching category weights: {e}")
-        return {"error": str(e)}
-
-    finally:
-    	conn.close()
-
-
 @app.get("/api/delivery/trend")
 def get_delivery_trend():
     """
