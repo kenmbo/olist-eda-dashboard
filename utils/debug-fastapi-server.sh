@@ -14,3 +14,4 @@ sed -n '1,160p' "$capture_dir/server.log"
 kill "$server_pid" 2>/dev/null
 wait "$server_pid" 2>/dev/null
 exit "$curl_exit"
+

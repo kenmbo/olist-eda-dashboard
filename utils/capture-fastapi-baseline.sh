@@ -69,3 +69,4 @@ for endpoint in "${endpoints[@]}"; do
 done
 
 printf '%s\n' "$capture_dir"
+
