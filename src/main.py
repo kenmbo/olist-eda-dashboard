@@ -426,3 +426,63 @@ def get_regression_trend():
     finally:
         if conn:
             conn.close()
+
+@app.get("/api/predictions/sales-forecast")
+def get_sales_forecast():
+    """
+    Retrieves historical monthly sales and projects a forecast through Dec 2018,
+    accounting for the November (Black Friday) seasonal spike.
+    """
+    conn = None
+    try:
+        conn = database.get_connection()
+        df = pd.read_sql_query(queries.monthly_sales_history, conn)
+
+        # 1. Calculate the baseline linear trend
+        x_numeric = np.arange(len(df))
+        z = np.polyfit(x_numeric, df['total_sales'], 1)
+        p = np.poly1d(z)
+
+        # 2. Calculate the historical November multiplier (Black Friday impact)
+        nov_17_idx = df.index[df['order_month'] == '2017-11'].tolist()
+        if nov_17_idx:
+            idx = nov_17_idx[0]
+            nov_17_actual = df.loc[idx, 'total_sales']
+            nov_17_trend = p(idx)
+            nov_multiplier = nov_17_actual / nov_17_trend if nov_17_trend > 0 else 1.5
+        else:
+            nov_multiplier = 1.5 # Fallback multiplier
+
+        # 3. Project the next 4 months (Sept, Oct, Nov, Dec 2018)
+        future_months = ['2018-09', '2018-10', '2018-11', '2018-12']
+        future_x = np.arange(len(df), len(df) + 4)
+        base_forecast = p(future_x)
+
+        # Apply the multiplier to November 2018 (index 2 of future array)
+        forecast_values = base_forecast.copy()
+        forecast_values[2] = forecast_values[2] * nov_multiplier
+
+        # 4. Prepare arrays for Plotly
+        # To connect the lines visually, the forecast array must start with the LAST actual month's value
+        all_months = df['order_month'].tolist() + future_months
+
+        # Actuals: [val, val, val, null, null, null, null]
+        actuals = df['total_sales'].round(2).tolist() + [None, None, None, None]
+
+        # Forecast: [null, null, ..., LAST_ACTUAL_VAL, forecast1, forecast2, forecast3, forecast4]
+        last_actual = df['total_sales'].iloc[-1]
+        forecast = [None] * (len(df) - 1) + [round(last_actual, 2)] + [round(val, 2) for val in forecast_values]
+
+        return {
+            "months": all_months,
+            "actual_sales": actuals,
+            "forecast_sales": forecast
+        }
+
+    except Exception as e:
+        print(f"Error generating sales forecast: {e}")
+        return {"error": str(e)}
+
+    finally:
+        if conn:
+            conn.close()
