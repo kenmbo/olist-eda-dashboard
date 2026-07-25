@@ -511,3 +511,16 @@ WHERE o.order_status = 'delivered'
 GROUP BY order_date
 ORDER BY order_date ASC
 """
+
+monthly_sales_history = """
+SELECT
+    SUBSTR(o.order_purchase_timestamp, 1, 7) AS order_month,
+    SUM(op.payment_value) AS total_sales
+FROM orders o
+JOIN order_payments op ON o.order_id = op.order_id
+WHERE o.order_status = 'delivered'
+  AND o.order_purchase_timestamp >= '2017-01-01' -- Skip partial 2016 data
+  AND o.order_purchase_timestamp < '2018-09-01'  -- Only use complete months
+GROUP BY order_month
+ORDER BY order_month ASC
+"""
