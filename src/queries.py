@@ -524,3 +524,16 @@ WHERE o.order_status = 'delivered'
 GROUP BY order_month
 ORDER BY order_month ASC
 """
+
+rfm_raw_data = """
+SELECT
+    c.customer_unique_id,
+    MAX(o.order_purchase_timestamp) as last_purchase_date,
+    COUNT(DISTINCT o.order_id) as frequency,
+    SUM(op.payment_value) as monetary
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+JOIN order_payments op ON o.order_id = op.order_id
+WHERE o.order_status = 'delivered'
+GROUP BY c.customer_unique_id
+"""
