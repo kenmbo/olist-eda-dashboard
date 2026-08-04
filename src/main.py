@@ -486,3 +486,57 @@ def get_sales_forecast():
     finally:
         if conn:
             conn.close()
+
+@app.get("/api/predictions/rfm")
+def get_rfm_segmentation():
+    """
+    Calculates Recency, Frequency, and Monetary values for all customers,
+    assigns behavioral segments, and returns a representative sample for UI performance.
+    """
+    conn = None
+    try:
+        conn = database.get_connection()
+        df = pd.read_sql_query(queries.rfm_raw_data, conn)
+
+        # 1. Calculate Recency (Days since last purchase)
+        df['last_purchase_date'] = pd.to_datetime(df['last_purchase_date'])
+        # Reference date: 1 day after the maximum date in the dataset
+        ref_date = df['last_purchase_date'].max() + pd.Timedelta(days=1)
+        df['recency'] = (ref_date - df['last_purchase_date']).dt.days
+
+        # 2. Assign Scores (1-4 scale)
+        # Recency: Lower days = higher score (4 is most recent)
+        df['r_score'] = pd.qcut(df['recency'], q=4, labels=[4, 3, 2, 1])
+        # Monetary: Higher spend = higher score
+        df['m_score'] = pd.qcut(df['monetary'], q=4, labels=[1, 2, 3, 4])
+        # Frequency: Olist is ~95% single-purchase. Manual scoring prevents quantile errors.
+        df['f_score'] = df['frequency'].apply(lambda x: 1 if x == 1 else (2 if x == 2 else 3))
+
+        # 3. Define Segmentation Logic
+        def assign_segment(row):
+            r, f, m = row['r_score'], row['f_score'], row['m_score']
+            if r >= 3 and (f >= 2 or m >= 3): return "Champions"
+            if r >= 3 and f == 1 and m <= 2: return "Recent/Promising"
+            if r == 2 and m >= 3: return "Loyal"
+            if r <= 2 and (f >= 2 or m >= 3): return "At Risk"
+            return "Hibernating"
+
+        df['segment'] = df.apply(assign_segment, axis=1)
+
+        # 4. Sample for UI Performance (2000 random customers)
+        df_sample = df.sample(n=2000, random_state=42)
+
+        return {
+            "recency": df_sample['recency'].tolist(),
+            "frequency": df_sample['frequency'].tolist(),
+            "monetary": df_sample['monetary'].round(2).tolist(),
+            "segment": df_sample['segment'].tolist()
+        }
+
+    except Exception as e:
+        print(f"Error calculating RFM: {e}")
+        return {"error": str(e)}
+
+    finally:
+        if conn:
+            conn.close()
