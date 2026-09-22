@@ -540,3 +540,22 @@ def get_rfm_segmentation():
     finally:
         if conn:
             conn.close()
+
+
+@app.get("/api/predictions/clv")
+def get_predicted_clv():
+    """
+    Calculates Predicted Customer Lifetime Value (CLV) and groups it by RFM segment.
+    Uses a probabilistic heuristic based on AOV, Recency, and Frequency.
+    """
+    conn = None
+    try:
+    	conn = database.get_connection()
+
+    except Exception as e:
+        print(f"Error calculating Predicted CLV: {e}")
+        return {"error": str(e)}
+
+    finally:
+        if conn:
+            conn.close()
