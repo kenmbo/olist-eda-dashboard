@@ -541,7 +541,6 @@ def get_rfm_segmentation():
         if conn:
             conn.close()
 
-
 @app.get("/api/predictions/clv")
 def get_predicted_clv():
     """
@@ -550,7 +549,46 @@ def get_predicted_clv():
     """
     conn = None
     try:
-    	conn = database.get_connection()
+        conn = database.get_connection()
+        df = pd.read_sql_query(queries.rfm_raw_data, conn)
+
+        # 1. Recreate Segments (Keeps endpoint stateless)
+        df['last_purchase_date'] = pd.to_datetime(df['last_purchase_date'])
+        ref_date = df['last_purchase_date'].max() + pd.Timedelta(days=1)
+        df['recency'] = (ref_date - df['last_purchase_date']).dt.days
+
+        df['r_score'] = pd.qcut(df['recency'], q=4, labels=[4, 3, 2, 1]).astype(int)
+        df['m_score'] = pd.qcut(df['monetary'], q=4, labels=[1, 2, 3, 4]).astype(int)
+        df['f_score'] = df['frequency'].apply(lambda x: 1 if x == 1 else (2 if x == 2 else 3))
+
+        def assign_segment(row):
+            r, f, m = row['r_score'], row['f_score'], row['m_score']
+            if r >= 3 and (f >= 2 or m >= 3): return "Champions"
+            if r >= 3 and f == 1 and m <= 2: return "Recent/Promising"
+            if r == 2 and m >= 3: return "Loyal"
+            if r <= 2 and (f >= 2 or m >= 3): return "At Risk"
+            return "Hibernating"
+
+        df['segment'] = df.apply(assign_segment, axis=1)
+
+        # 2. Calculate Predicted CLV
+        # Historic Spend + (Average Order Value * Predicted Future Purchases)
+        # We penalize predicted future purchases by recency (older customers buy less)
+        df['aov'] = df['monetary'] / df['frequency']
+        df['predicted_future_purchases'] = df['frequency'] * (df['r_score'] / 4)
+        df['predicted_clv'] = df['monetary'] + (df['aov'] * df['predicted_future_purchases'])
+
+        # 3. Filter massive outliers to keep the Violin plot readable (remove top 1%)
+        q99 = df['predicted_clv'].quantile(0.99)
+        df_filtered = df[df['predicted_clv'] <= q99]
+
+        # 4. Sample for UI Performance
+        df_sample = df_filtered.sample(n=3000, random_state=42)
+
+        return {
+            "segment": df_sample['segment'].tolist(),
+            "predicted_clv": df_sample['predicted_clv'].round(2).tolist()
+        }
 
     except Exception as e:
         print(f"Error calculating Predicted CLV: {e}")
