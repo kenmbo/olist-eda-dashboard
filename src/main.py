@@ -20,7 +20,16 @@ app = FastAPI(
 
 origins_str = os.getenv("CORS_ORIGINS", "")
 
-origins = [origin.strip() for origin in origins_str.split(",") if origin.strip()]
+origins = [
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "http://localhost:5174",
+    # Add your GCP frontend URL just in case you ever test from there
+    "https://olist-eda-dashboard-frontend-689852289803.us-central1.run.app", 
+    # Add your shiny new custom domains!
+    "https://olisteda.com",
+    "https://www.olisteda.com",
+]
 
 app.add_middleware(
     CORSMiddleware,
@@ -535,6 +544,24 @@ def get_rfm_segmentation():
 
     except Exception as e:
         print(f"Error calculating RFM: {e}")
+        return {"error": str(e)}
+
+    finally:
+        if conn:
+            conn.close()
+
+@app.get("/api/predictions/clv")
+def get_predicted_clv():
+    """
+    Calculates Predicted Customer Lifetime Value (CLV) and groups it by RFM segment.
+    Uses a probabilistic heuristic based on AOV, Recency, and Frequency.
+    """
+    conn = None
+    try:
+    	conn = database.get_connection()
+
+    except Exception as e:
+        print(f"Error calculating Predicted CLV: {e}")
         return {"error": str(e)}
 
     finally:
