@@ -597,3 +597,22 @@ def get_predicted_clv():
     finally:
         if conn:
             conn.close()
+
+@app.get("/api/predictions/delay-risk")
+def get_delay_risk_factors():
+    """
+    Calculates the statistical importance of different logistical variables 
+    in predicting whether an order will be delivered late.
+    """
+    conn = None
+    try:
+        conn = database.get_connection()
+
+    except Exception as e:
+    	print(f"Error calculating delay risk: {e}")
+        return {"error": str(e)}
+
+    finally:
+        if conn:
+            conn.close()
+
