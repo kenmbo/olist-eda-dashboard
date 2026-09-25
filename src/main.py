@@ -601,18 +601,47 @@ def get_predicted_clv():
 @app.get("/api/predictions/delay-risk")
 def get_delay_risk_factors():
     """
-    Calculates the statistical importance of different logistical variables 
+    Calculates the statistical importance of different logistical variables
     in predicting whether an order will be delivered late.
     """
     conn = None
     try:
         conn = database.get_connection()
+        df = pd.read_sql_query(queries.delay_risk_features, conn)
+
+        # Drop rows with missing values
+        df = df.dropna()
+
+        # Calculate the correlation matrix against the target variable (is_late)
+        correlations = df.corr()['is_late'].drop('is_late')
+
+        # Take the absolute value (magnitude of predictive power) and sort ascending
+        importance = correlations.abs().sort_values(ascending=True)
+
+        # Normalize to 100% so it reads clearly as a "weighting" metric
+        normalized_importance = (importance / importance.sum()) * 100
+
+        # Map technical column names to user-friendly UI labels
+        label_map = {
+            'price': 'Item Price',
+            'freight_value': 'Freight Cost',
+            'product_weight_g': 'Product Weight',
+            'product_volume_cm3': 'Product Volume',
+            'processing_days': 'Warehouse Processing Time',
+            'is_interstate': 'Interstate Routing'
+        }
+
+        labels = [label_map.get(col, col) for col in normalized_importance.index]
+
+        return {
+            "factors": labels,
+            "importance_scores": normalized_importance.round(2).tolist()
+        }
 
     except Exception as e:
-    	print(f"Error calculating delay risk: {e}")
+        print(f"Error calculating delay risk: {e}")
         return {"error": str(e)}
 
     finally:
         if conn:
             conn.close()
-
