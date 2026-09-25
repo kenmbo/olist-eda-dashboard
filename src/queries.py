@@ -537,3 +537,22 @@ JOIN order_payments op ON o.order_id = op.order_id
 WHERE o.order_status = 'delivered'
 GROUP BY c.customer_unique_id
 """
+
+delay_risk_features = """
+SELECT
+    julianday(o.order_delivered_customer_date) > julianday(o.order_estimated_delivery_date) AS is_late,
+    oi.price,
+    oi.freight_value,
+    p.product_weight_g,
+    (p.product_length_cm * p.product_height_cm * p.product_width_cm) AS product_volume_cm3,
+    julianday(o.order_delivered_carrier_date) - julianday(o.order_approved_at) AS processing_days,
+    CASE WHEN c.customer_state != s.seller_state THEN 1 ELSE 0 END AS is_interstate
+FROM orders o
+JOIN order_items oi ON o.order_id = oi.order_id
+JOIN products p ON oi.product_id = p.product_id
+JOIN customers c ON o.customer_id = c.customer_id
+JOIN sellers s ON oi.seller_id = s.seller_id
+WHERE o.order_status = 'delivered'
+  AND o.order_delivered_customer_date IS NOT NULL
+  AND o.order_estimated_delivery_date IS NOT NULL
+"""
